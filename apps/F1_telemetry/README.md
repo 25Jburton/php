@@ -1,4 +1,4 @@
-# Application that calls the FastF1 API and displays user specified data
+# Application that calls the OpenF1 API and displays user specified data
 - Bulit using PHP, JS (jQuery), SASS
 - Single page application
 
