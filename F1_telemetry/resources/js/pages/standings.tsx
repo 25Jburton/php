@@ -31,7 +31,6 @@ export default function Dashboard() {
 			<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
 				<div className="grid auto-rows-min gap-4 md:grid-cols-1">
 					<div className="space-y-1">
-						<Label htmlFor="year">Year</Label>
 						<Select>
 							<SelectTrigger className="w-[100%]">
 								<SelectValue placeholder="Year" />

@@ -2,26 +2,12 @@ import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
-  import { Input } from "@/components/ui/input"
-  import { Label } from "@/components/ui/label"
-  import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select"
-import React from 'react';
+import { Label } from "@/components/ui/label"
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
@@ -31,11 +17,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 
 export default function Dashboard() {
-const [goal, setGoal] = React.useState(350)
- 
-  function onClick(adjustment: number) {
-    setGoal(Math.max(200, Math.min(400, goal + adjustment)))
-  }
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
@@ -56,96 +37,118 @@ const [goal, setGoal] = React.useState(350)
                         <TabsContent value="driver">
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Search Options</CardTitle>
-                                    <CardDescription>
-                                        Apply filters to modify card page content.
-                                    </CardDescription>
+                                    <Label htmlFor="name">Driver Search</Label>
                                 </CardHeader>
                                 <CardContent className="space-y-2">
-                                    <div className="space-y-1">
-                                        <Label htmlFor="name">Name</Label>
-                                        <Select>
-                                            <SelectTrigger className="w-[30%]">
-                                                <SelectValue placeholder="Driver Name" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="carlos_sainz">Carlos Sainz</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                    <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+                                        <div className="space-y-1">
+                                            <Select>
+                                                <SelectTrigger className="w-[100%]">
+                                                    <SelectValue placeholder="Driver Name" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="carlos_sainz">Carlos Sainz</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <Button className="w-[100%]">Search Drivers</Button>
+                                        </div>
+                                        <div className="space-y-1 text-end">
+                                            <Button className="w-[25%]" variant="destructive">Reset Search</Button>
+                                        </div>
                                     </div>
                                 </CardContent>
-                                <CardFooter>
-                                    <Button className="w-[30%]">Search Drivers</Button>
-                                </CardFooter>
+                                <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                </div>
                             </Card>
                         </TabsContent>
                         <TabsContent value="team">
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Search Options</CardTitle>
-                                    <CardDescription>
-                                        Apply filters to modify card page content.
-                                    </CardDescription>
+                                    <Label htmlFor="team">Team</Label>
                                 </CardHeader>
                                 <CardContent className="space-y-2">
-                                    <div className="space-y-1">
-                                        <Label htmlFor="team">Team</Label>
-                                        <Select>
-                                            <SelectTrigger className="w-[30%]">
-                                                <SelectValue placeholder="Theme" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="red_bull">Red Bull</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                    <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+                                        <div className="space-y-1">
+                                            <Select>
+                                                <SelectTrigger className="w-[100%]">
+                                                    <SelectValue placeholder="Team" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="red_bull">Red Bull</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <Button className="w-[100%]">Search Teams</Button>
+                                        </div>
+                                        <div className="space-y-1 text-end">
+                                            <Button className="w-[25%]" variant="destructive">Reset Search</Button>
+                                        </div>
                                     </div>
                                 </CardContent>
-                                <CardFooter>
-                                    <Button className="w-[30%]">Search Teams</Button>
-                                </CardFooter>
+                                <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                </div>
                             </Card>
                         </TabsContent>
                         <TabsContent value="combined">
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Search Options</CardTitle>
-                                    <CardDescription>
-                                        Apply filters to modify card page content.
-                                    </CardDescription>
+                                    <Label htmlFor="combined">Year</Label>
                                 </CardHeader>
                                 <CardContent className="space-y-2">
-                                    <div className="space-y-1">
-                                        <Label htmlFor="combined">Year</Label>
-                                        <Select>
-                                            <SelectTrigger className="w-[30%]">
-                                                <SelectValue placeholder="Theme" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="2025">2025</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                    <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+                                        <div className="space-y-1">
+                                            <Select>
+                                                <SelectTrigger className="w-[100%]">
+                                                    <SelectValue placeholder="Year" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="2025">2025</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <Button className="w-[100%]">Search Driver & Team</Button>
+                                        </div>
+                                        <div className="space-y-1 text-end">
+                                            <Button className="w-[25%]" variant="destructive">Reset Search</Button>
+                                        </div>
                                     </div>
                                 </CardContent>
-                                <CardFooter>
-                                    <Button className="w-[30%]">Search Driver & Team</Button>
-                                </CardFooter>
+                                <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+                                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                                    </div>
+                                </div>
                             </Card>
                         </TabsContent>
                     </Tabs>
-                </div>
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                </div>
-                <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
                 </div>
             </div>
         </AppLayout>

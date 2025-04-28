@@ -1,6 +1,8 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
+import AppLogoIcon from './app-logo-icon';
+import { Link } from '@inertiajs/react';
 
 export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItemType[] }) {
     return (
@@ -8,6 +10,13 @@ export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: Breadcrum
             <div className="flex items-center gap-2">
                 <SidebarTrigger className="-ml-1" />
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
+            </div>
+            <div className=" m-3 ml-1 grid flex-1 text-end justify-end text-lg text-sidebar-primary-foreground flex">
+                <span className="mb-0.5 truncate leading-none font-semibold size-12">
+                    <Link href='/dashboard'>
+                        <AppLogoIcon />
+                    </Link>
+                </span>
             </div>
         </header>
     );
