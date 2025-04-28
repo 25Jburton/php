@@ -62,7 +62,7 @@ export default function Dashboard() {
 					</div>
 				</div>
 				<div className="grid auto-rows-min gap-4 md:grid-cols-3">
-					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video  rounded-xl border">
 						<div>
 							Circuit Data HERE
 							- circuitName
@@ -71,13 +71,12 @@ export default function Dashboard() {
 							- firstParticipationYear
 							- lapRecord
 							- numberOfCorners
-							- lapRecord
 							- fastestLapYear
 							- fastestLapDriverId / fastestLapTeamId
 							- More Info (url)
 						</div>
 					</div>
-					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video  rounded-xl border">
 						<div>
 							Driver Data HERE 
 							- surname , name (shortName)
@@ -94,7 +93,7 @@ export default function Dashboard() {
 							- time
 						</div>
 					</div>
-					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video  rounded-xl border">
 						<div>
 							Team Data HERE
 							- teamName
@@ -106,7 +105,7 @@ export default function Dashboard() {
 						</div>
 					</div>
 				</div>
-				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
+				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1  rounded-xl border md:min-h-min">
 					<Label htmlFor="results">Output Session's Results</Label>
 					Table looping all basic driver data for session. Selecting a record populates top blocks
 					
