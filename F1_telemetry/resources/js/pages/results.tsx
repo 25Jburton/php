@@ -3,8 +3,13 @@ import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@radix-ui/react-select';
-
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select";
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -24,11 +29,10 @@ export default function Dashboard() {
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Session Results" />
 			<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-				<div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[10vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
-					<div className="space-y-1 col-4">
-						<Label htmlFor="year">Year</Label>
+				<div className="grid auto-rows-min gap-4 md:grid-cols-3">
+					<div className="space-y-1">
 						<Select>
-							<SelectTrigger className="w-[30%]">
+							<SelectTrigger className="w-[100%]">
 								<SelectValue placeholder="Year" />
 							</SelectTrigger>
 							<SelectContent>
@@ -36,10 +40,9 @@ export default function Dashboard() {
 							</SelectContent>
 						</Select>
 					</div>
-					<div className="space-y-1 col-4">
-						<Label htmlFor="circuit">Circuit</Label>
+					<div className="space-y-1">
 						<Select>
-							<SelectTrigger className="w-[30%]">
+							<SelectTrigger className="w-[100%]">
 								<SelectValue placeholder="Circuit" />
 							</SelectTrigger>
 							<SelectContent>
@@ -47,10 +50,9 @@ export default function Dashboard() {
 							</SelectContent>
 						</Select>
 					</div>
-					<div className="space-y-1 col-4">
-						<Label htmlFor="session">Session</Label>
+					<div className="space-y-1">
 						<Select>
-							<SelectTrigger className="w-[30%]">
+							<SelectTrigger className="w-[100%]">
 								<SelectValue placeholder="Session" />
 							</SelectTrigger>
 							<SelectContent>
@@ -63,21 +65,55 @@ export default function Dashboard() {
 					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
 						<div>
 							Circuit Data HERE
+							- circuitName
+							- country, city
+							- circuitLength
+							- firstParticipationYear
+							- lapRecord
+							- numberOfCorners
+							- lapRecord
+							- fastestLapYear
+							- fastestLapDriverId / fastestLapTeamId
+							- More Info (url)
 						</div>
 					</div>
-					<div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
 						<div>
-							Driver Data HERE  
+							Driver Data HERE 
+							- surname , name (shortName)
+							- nationality
+							- number
+							- birthday
+							- More Info (url)
+
+							-----------------------
+							- Session selected
+							- raceName
+							- round
+							- date / time
+							- time
 						</div>
 					</div>
-					<div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
 						<div>
 							Team Data HERE
+							- teamName
+							- nationality
+							- firstAppareance
+							- constructorsChampionships
+							- driversChampionships
+							- More Info (url)
 						</div>
 					</div>
 				</div>
-				<div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
+				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
 					<Label htmlFor="results">Output Session's Results</Label>
+					Table looping all basic driver data for session. Selecting a record populates top blocks
+					
+					- Session selected
+					- surname , name (shortName)
+					- date / time
+					- time
 					<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
 				</div>
 			</div>
