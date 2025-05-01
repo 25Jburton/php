@@ -4,6 +4,7 @@
 use App\Http\Controllers\Api\DriverSessionController;
 use App\Http\Controllers\Api\TeamSessionController;
 use App\Http\Controllers\Api\CircuitsSessionController;
+use App\Http\Controllers\Api\StandingsSessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -40,4 +41,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/allCircuits/{limit}', [CircuitsSessionController::class, 'showAll'])
     ->name('allCircuits');
+
+    Route::get('/standingsDrivers/{year}/{limit}', [StandingsSessionController::class, 'showAllDrivers'])
+    ->name('standingsDrivers');
+
+    Route::get('/standingsConstructors/{year}/{limit}', [StandingsSessionController::class, 'showAllConstructors'])
+    ->name('standingsConstructors');
 });
