@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use Inertia\Inertia;
 use App\Http\Requests\Api\RetrieveDrivers;
-use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -12,16 +10,23 @@ class DriverSessionController extends RetrieveDrivers
 	/**
 	 * Handle initial load driver request.
 	 */
-	public function showAll(RetrieveDrivers $request, $limit = 900): Response
+	public function showAll(Request $request): Array
 	{   
-		$response =  $request->getAllDrivers($limit);
+		$limit = $request->route('limit');
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => $limit,
+			'section' => 'drivers'
+		])->get('{+endpoint}/{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
 		return $response;
 	}
 
 	/**
 	 * Handle an incoming driver year request.
 	 */
-	public function showByYear(Request $request): Response
+	public function showByYear(Request $request): Array
 	{   
 		$year = $request->route('year');
 		$limit = $request->route('limit');
@@ -32,6 +37,8 @@ class DriverSessionController extends RetrieveDrivers
 			'year' => $year,
 			'section' => 'drivers'
 		])->get('{+endpoint}/{year}/{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
 		return $response;
 	}
 

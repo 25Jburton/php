@@ -11,7 +11,7 @@ class StandingsSessionController extends RetrieveDrivers
 	/**
 	 * Handle initial load driver request.
 	 */
-	public function showAllDrivers(Request $request): Response
+	public function showAllDrivers(Request $request): Array
 	{
         $year = $request->route('year');
 		$limit = $request->route('limit');
@@ -22,10 +22,12 @@ class StandingsSessionController extends RetrieveDrivers
             'year' => $year,
 			'section' => 'drivers-championship'
 		])->get('{+endpoint}/{year}/{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
 		return $response;
 	}
 
-    public function showAllConstructors(Request $request): Response
+    public function showAllConstructors(Request $request): Array
 	{
         $year = $request->route('year');
 		$limit = $request->route('limit');
@@ -36,6 +38,8 @@ class StandingsSessionController extends RetrieveDrivers
             'year' => $year,
 			'section' => 'constructors-championship'
 		])->get('{+endpoint}/{year}/{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
 		return $response;
 	}
 }
