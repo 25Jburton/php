@@ -6,31 +6,31 @@ use Illuminate\Http\Client\Response;
 
 class RetrieveDrivers
 {
-    /**
-     * Attempt to get all drivers
-     */
-    public function getAllDrivers($limit): Response
-    {
-        $response = Http::withUrlParameters([
-            'endpoint' => 'https://f1api.dev/api/',
-            'limit' => $limit,
-            'section' => 'drivers'
-        ])->get('{+endpoint}/{section}?limit={limit}');
-        return $response;
-    }
+	/**
+	 * Attempt to get all drivers
+	 */
+	public function getAllDrivers($limit): Response
+	{
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => $limit,
+			'section' => 'drivers'
+		])->get('{+endpoint}/{section}?limit={limit}');
+		return $response;
+	}
 
-     /**
-     * Attempt to get all drivers
-     */
-    public function getDriversByYear($year, $limit): Response
-    {
-        $response = Http::withUrlParameters([
-            'endpoint' => 'https://f1api.dev/api/',
-            'limit' => $limit,
-            'year' => $year,
-            'section' => 'drivers'
-        ])->get('{+endpoint}/{year}/{section}?limit={limit}');
+	 /**
+	 * Attempt to get all drivers
+	 */
+	public function getDriversByYear($year, $limit): Response
+	{
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => $limit,
+			'year' => $year,
+			'section' => 'drivers'
+		])->get('{+endpoint}/{year}/{section}?limit={limit}');
 
-        return $response;
-    }
+		return $response;
+	}
 }

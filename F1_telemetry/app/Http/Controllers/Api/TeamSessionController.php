@@ -1,20 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use Inertia\Inertia;
 use App\Http\Requests\Api\RetrieveDrivers;
 use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class DriverSessionController extends RetrieveDrivers
+class TeamSessionController extends RetrieveDrivers
 {
 	/**
 	 * Handle initial load driver request.
 	 */
-	public function showAll(RetrieveDrivers $request, $limit = 900): Response
-	{   
-		$response =  $request->getAllDrivers($limit);
+	public function showAll(Request $request): Response
+	{
+        $limit = $request->route('limit');
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => $limit,
+			'section' => 'teams'
+		])->get('{+endpoint}/{section}?limit={limit}');
 		return $response;
 	}
 
@@ -30,7 +34,7 @@ class DriverSessionController extends RetrieveDrivers
 			'endpoint' => 'https://f1api.dev/api/',
 			'limit' => $limit,
 			'year' => $year,
-			'section' => 'drivers'
+			'section' => 'teams'
 		])->get('{+endpoint}/{year}/{section}?limit={limit}');
 		return $response;
 	}
