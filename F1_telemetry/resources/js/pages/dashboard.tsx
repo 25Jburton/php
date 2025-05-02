@@ -138,7 +138,7 @@ export default function Dashboard() {
 												aria-expanded={open}
 												className="w-[100%] justify-between"
 												>
-												{value ? driver.find((item) => item['driverId'] === value)?['name']: "Select Driver...": "Select Driver..."}
+												{value ? driver.find((item) => item['name'] +' '+ item['surname'] === value)?value: "Select Driver...": "Select Driver..."}
 												<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 												</Button>
 											</PopoverTrigger>
@@ -151,7 +151,7 @@ export default function Dashboard() {
 													{driver.map((item) => (
 														<CommandItem
 														key={item['driverId']}
-														value={item['driverId']}
+														value={item['name'] +' '+ item['surname']}
 														onSelect={(currentValue) => {
 															setValue(currentValue === value ? "" : currentValue)
 															setOpen(false)
