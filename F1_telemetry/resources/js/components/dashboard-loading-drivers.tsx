@@ -47,8 +47,8 @@ export function LoadingDrivers() {
 													</SelectContent>
 												</Select>
 											</div>
-											<div className="space-y-1">
-												<Button className="w-[100%]">Search Drivers</Button>
+											<div className="space-y-1 grid md:grid-cols-2">
+												<Button className="w-[100%]">Search Driver</Button>
 											</div>
 											<div className="space-y-1 text-end">
 												<Button className="w-[50%] overflow-hidden" variant="destructive">Reset Search</Button>

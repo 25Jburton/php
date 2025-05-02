@@ -18,15 +18,15 @@ export function DriverPopoverSearch({ driver }: { driver: DriversItemType[] }) {
                 aria-expanded={open}
                 className="w-[100%] justify-between"
                 >
-                {value ? driver.find((item) => item['name'] +' '+ item['surname'] === value)?value: "Select Driver...": "Select Driver..."}
+                {value ? driver.find((item) => item['name'] +' '+ item['surname'] === value)?value: "Searching Drivers": "Search Drivers"}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[100%] p-0">
                 <Command>
-                <CommandInput placeholder="Search framework..." />
+                <CommandInput placeholder="Search Drivers..." />
                 <CommandList>
-                    <CommandEmpty>No framework found.</CommandEmpty>
+                    <CommandEmpty>No Drivers found.</CommandEmpty>
                     <CommandGroup>
                     {driver.map((item) => (
                         <CommandItem
