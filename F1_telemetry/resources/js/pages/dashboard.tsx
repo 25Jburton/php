@@ -8,13 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import React, { useState, useEffect } from 'react';
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Skeleton } from "@/components/ui/skeleton"
-import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
-import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
-import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
+import { LoadingDrivers } from '@/components/dashboard-loading-drivers';
+import { DriverCard } from '@/components/dashboard-driver-card';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -24,8 +19,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard() {
-	const [open, setOpen] = React.useState(false)
-	const [value, setValue] = React.useState("")
 	const [driver, setDrivers] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	useEffect(() => {
@@ -38,8 +31,6 @@ export default function Dashboard() {
 				}
 				let actualData = await response.json();
 				setDrivers(actualData['drivers']);
-
-				console.log(actualData['drivers']);
 			} catch (e) {
 				const error = e;
 			} finally {
@@ -50,61 +41,7 @@ export default function Dashboard() {
 	}, []);
 
 	if (isLoading) {
-		return  <AppLayout breadcrumbs={breadcrumbs}>
-					<Head title="Dashboard" />
-					<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-						<div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[10vh] flex-1  rounded-xl border md:min-h-min">
-							<Tabs defaultValue="driver" className="w-[100%]">
-								<TabsList className="grid w-full grid-cols-2 w-[100%]">
-									<TabsTrigger value="driver">
-										Driver
-									</TabsTrigger>
-									<TabsTrigger value="team">
-									Team
-									</TabsTrigger>
-								</TabsList>
-								<TabsContent value="driver">
-									<Card>
-										<CardHeader>
-											<Label htmlFor="name">Driver Search</Label>
-										</CardHeader>
-										<CardContent className="space-y-2">
-											<div className="grid auto-rows-min gap-4 md:grid-cols-3">
-												<div className="space-y-1">
-													<Select>
-														<SelectTrigger className="w-[100%]">
-															<SelectValue placeholder="Loading Drivers" />
-														</SelectTrigger>
-														<SelectContent>
-														</SelectContent>
-													</Select>
-												</div>
-												<div className="space-y-1">
-													<Button className="w-[100%]">Search Drivers</Button>
-												</div>
-												<div className="space-y-1 text-end">
-													<Button className="w-[50%] overflow-hidden" variant="destructive">Reset Search</Button>
-												</div>
-											</div>
-										</CardContent>
-										<ScrollArea className="h-[68vh] rounded-md border p-4">
-											<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-1 aspect-video  text-center">
-												<Skeleton className="h-[100%] w-[100%] rounded-xl" />
-												<span className='text-red-500'>Just a moment, loading list of Drivers from F1 API's database!</span>
-												<div className="space-y-2">
-													<Skeleton className="h-6 w-[100%]" />
-													<Skeleton className="h-6 w-[100%]" />
-													<Skeleton className="h-6 w-[100%]" />
-													<Skeleton className="h-6 w-[100%]" />
-												</div>
-											</div>
-										</ScrollArea>
-									</Card>
-								</TabsContent>
-							</Tabs>
-						</div>
-					</div>
-				</AppLayout>;
+		return <LoadingDrivers />
 	}
 
 	return (
@@ -122,111 +59,7 @@ export default function Dashboard() {
 							</TabsTrigger>
 						</TabsList>
 						<TabsContent value="driver">
-							<Card>
-								<CardHeader>
-									<Label htmlFor="name">Driver Search</Label>
-								</CardHeader>
-								<CardContent className="space-y-2">
-									<div className="grid auto-rows-min gap-4 md:grid-cols-3">
-										<div className="space-y-1">
-
-										<Popover open={open} onOpenChange={setOpen}>
-											<PopoverTrigger asChild>
-												<Button
-												variant="outline"
-												role="combobox"
-												aria-expanded={open}
-												className="w-[100%] justify-between"
-												>
-												{value ? driver.find((item) => item['name'] +' '+ item['surname'] === value)?value: "Select Driver...": "Select Driver..."}
-												<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-												</Button>
-											</PopoverTrigger>
-											<PopoverContent className="w-[100%] p-0">
-												<Command>
-												<CommandInput placeholder="Search framework..." />
-												<CommandList>
-													<CommandEmpty>No framework found.</CommandEmpty>
-													<CommandGroup>
-													{driver.map((item) => (
-														<CommandItem
-														key={item['driverId']}
-														value={item['name'] +' '+ item['surname']}
-														onSelect={(currentValue) => {
-															setValue(currentValue === value ? "" : currentValue)
-															setOpen(false)
-														}}
-														>
-														<Check
-															className={cn(
-															"mr-2 h-4 w-4",
-															value === item['driverId'] ? "opacity-100" : "opacity-0"
-															)}
-														/>
-														{item['name']} {item['surname']}
-														</CommandItem>
-													))}
-													</CommandGroup>
-												</CommandList>
-												</Command>
-											</PopoverContent>
-										</Popover>
-
-
-											{/* <Select>
-												<SelectTrigger className="w-[100%]">
-													<SelectValue placeholder="Driver Name" />
-												</SelectTrigger>
-												<SelectContent>
-													{driver.map((item) => (
-														<SelectItem key={item['driverId']} value={item['driverId']}>{item['name']} {item['surname']}</SelectItem>
-													))}
-												</SelectContent>
-											</Select> */}
-										</div>
-										<div className="space-y-1">
-											<Button className="w-[100%]">Search Drivers</Button>
-										</div>
-										<div className="space-y-1 text-end">
-											<Button className="w-[50%] overflow-hidden" variant="destructive">Reset Search</Button>
-										</div>
-									</div>
-								</CardContent>
-								<ScrollArea className="h-[68vh] rounded-md border p-4">
-									<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-6">
-										{driver.map((item) => (
-											<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
-												<Drawer>
-													<DrawerTrigger><Button variant='ghost' size='lg'>{item['name']} {item['surname']}</Button></DrawerTrigger>
-													<DrawerContent>
-														<DrawerHeader className='text-center'>
-															<DrawerTitle><h1>{item['name']} {item['surname']}</h1></DrawerTitle>
-															<DrawerDescription>
-																General driver information.
-															</DrawerDescription>
-														</DrawerHeader>
-														<div className='text-center p-4 grid auto-rows-min gap-4 md:grid-cols-4 w-[100vw]'>
-															<span>{item['number'] && <span>Car Number: {item['number']}</span>}</span>
-															<span>Nationality: {item['nationality']}</span>
-															<span>DOB: {item['birthday']}</span>
-															<span >
-																<a href={item['url']} target='blank'>
-																	<Button variant="outline" className='text-green-500'>More Information</Button>
-																</a>
-															</span>
-														</div>
-														<DrawerFooter>
-														<DrawerClose>
-															<Button variant="outline" className='text-red-500'>Cancel</Button>
-														</DrawerClose>
-														</DrawerFooter>
-													</DrawerContent>
-												</Drawer>
-											</div>
-										))}
-									</div>
-								</ScrollArea>
-							</Card>
+							<DriverCard driver={driver} />
 						</TabsContent>
 						<TabsContent value="team">
 							<Card>

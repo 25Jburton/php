@@ -10,6 +10,16 @@ export interface BreadcrumbItem {
     href: string;
 }
 
+export interface DriversItemType {
+    driverId: string;
+    name: string;
+    surname: string;
+    number: string;
+    nationality: string;
+    birthday: string;
+    url: string;
+}
+
 export interface NavGroup {
     title: string;
     items: NavItem[];
