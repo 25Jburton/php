@@ -10,16 +10,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import React, { useState, useEffect } from 'react';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Skeleton } from "@/components/ui/skeleton"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
+import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
+import { Check, ChevronsUpDown } from "lucide-react"
+import { cn } from "@/lib/utils"
+import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
+import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -29,7 +24,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard() {
-
+	const [open, setOpen] = React.useState(false)
+	const [value, setValue] = React.useState("")
 	const [driver, setDrivers] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	useEffect(() => {
@@ -54,7 +50,6 @@ export default function Dashboard() {
 	}, []);
 
 	if (isLoading) {
-		
 		return  <AppLayout breadcrumbs={breadcrumbs}>
 					<Head title="Dashboard" />
 					<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
@@ -134,7 +129,51 @@ export default function Dashboard() {
 								<CardContent className="space-y-2">
 									<div className="grid auto-rows-min gap-4 md:grid-cols-3">
 										<div className="space-y-1">
-											<Select>
+
+										<Popover open={open} onOpenChange={setOpen}>
+											<PopoverTrigger asChild>
+												<Button
+												variant="outline"
+												role="combobox"
+												aria-expanded={open}
+												className="w-[100%] justify-between"
+												>
+												{value ? driver.find((item) => item['driverId'] === value)?['name']: "Select Driver...": "Select Driver..."}
+												<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+												</Button>
+											</PopoverTrigger>
+											<PopoverContent className="w-[100%] p-0">
+												<Command>
+												<CommandInput placeholder="Search framework..." />
+												<CommandList>
+													<CommandEmpty>No framework found.</CommandEmpty>
+													<CommandGroup>
+													{driver.map((item) => (
+														<CommandItem
+														key={item['driverId']}
+														value={item['driverId']}
+														onSelect={(currentValue) => {
+															setValue(currentValue === value ? "" : currentValue)
+															setOpen(false)
+														}}
+														>
+														<Check
+															className={cn(
+															"mr-2 h-4 w-4",
+															value === item['driverId'] ? "opacity-100" : "opacity-0"
+															)}
+														/>
+														{item['name']} {item['surname']}
+														</CommandItem>
+													))}
+													</CommandGroup>
+												</CommandList>
+												</Command>
+											</PopoverContent>
+										</Popover>
+
+
+											{/* <Select>
 												<SelectTrigger className="w-[100%]">
 													<SelectValue placeholder="Driver Name" />
 												</SelectTrigger>
@@ -143,7 +182,7 @@ export default function Dashboard() {
 														<SelectItem key={item['driverId']} value={item['driverId']}>{item['name']} {item['surname']}</SelectItem>
 													))}
 												</SelectContent>
-											</Select>
+											</Select> */}
 										</div>
 										<div className="space-y-1">
 											<Button className="w-[100%]">Search Drivers</Button>
