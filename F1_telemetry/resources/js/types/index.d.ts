@@ -20,6 +20,16 @@ export interface DriversItemType {
     url: string;
 }
 
+export interface TeamsItemType {
+    teamId: string;
+    teamName: string;
+    firstAppeareance: string;
+    constructorsChampionships: string;
+    teamNationality: string;
+    driversChampionships: string;
+    url: string;
+}
+
 export interface NavGroup {
     title: string;
     items: NavItem[];

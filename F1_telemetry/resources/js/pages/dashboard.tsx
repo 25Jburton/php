@@ -1,15 +1,11 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { Label } from "@/components/ui/label"
-import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import React, { useState, useEffect } from 'react';
-import { LoadingDrivers } from '@/components/dashboard-loading-drivers';
+import { LoadingDashboard } from '@/components/dashboard-loading';
 import { DriverCard } from '@/components/dashboard-driver-card';
+import { TeamsCard } from '@/components/dashboard-team-card';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -20,10 +16,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Dashboard() {
 	const [driver, setDrivers] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [teams, setTeams] = useState([]);
+	const [isLoadingDrivers, setIsLoadingDrivers] = useState(false);
+	const [isLoadingTeams, setIsLoadingTeams] = useState(false);
 	useEffect(() => {
 		const fetchData = async () => {
-			setIsLoading(true);
+			setIsLoadingDrivers(true);
 			try {
 				const response = await fetch('http://f1_telemetry.test/allDrivers/999');
 				if (!response.ok) {
@@ -34,15 +32,35 @@ export default function Dashboard() {
 			} catch (e) {
 				const error = e;
 			} finally {
-				setIsLoading(false);
+				setIsLoadingDrivers(false);
 			}
 		};
 		fetchData();
 	}, []);
 
-	if (isLoading) {
-		return <LoadingDrivers />
+	if (isLoadingDrivers) {
+		return <LoadingDashboard contentType="drivers" />
 	}
+
+	function clickTeamTab() {
+		const fetchData = async () => {
+			setIsLoadingTeams(true);
+			try {
+				const response = await fetch('http://f1_telemetry.test/allTeams/999');
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				let actualData = await response.json();
+				setTeams(actualData['teams']);
+			} catch (e) {
+				const error = e;
+			} finally {
+				setIsLoadingTeams(false);
+			}
+		};
+		fetchData();
+	}
+
 
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
@@ -54,7 +72,7 @@ export default function Dashboard() {
 							<TabsTrigger value="driver">
 								Driver
 							</TabsTrigger>
-							<TabsTrigger value="team">
+							<TabsTrigger value="team" onClick={clickTeamTab}>
 							   Team
 							</TabsTrigger>
 						</TabsList>
@@ -62,52 +80,7 @@ export default function Dashboard() {
 							<DriverCard driver={driver} />
 						</TabsContent>
 						<TabsContent value="team">
-							<Card>
-								<CardHeader>
-									<Label htmlFor="team">Team</Label>
-								</CardHeader>
-								<CardContent className="space-y-2">
-									<div className="grid auto-rows-min gap-4 md:grid-cols-3">
-										<div className="space-y-1">
-											<Select>
-												<SelectTrigger className="w-[100%]">
-													<SelectValue placeholder="Team" />
-												</SelectTrigger>
-												<SelectContent>
-													<SelectItem value="red_bull">Red Bull</SelectItem>
-												</SelectContent>
-											</Select>
-										</div>
-										<div className="space-y-1">
-											<Button className="w-[100%]">Search Teams</Button>
-										</div>
-										<div className="space-y-1 text-end">
-											<Button className="w-[50%] overflow-hidden" variant="destructive">Reset Search</Button>
-										</div>
-									</div>
-								</CardContent>
-								<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-2">
-									<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative  rounded-xl border">
-										<Label>
-											Loop all returned Teams 
-										</Label>
-										<ul>
-											<li>teamName</li>
-											<li>nationality</li>
-											<li>firstAppareance</li>
-											<li>constructorsChampionships</li>
-											<li>driversChampionships</li>
-											<li>More Info (url)</li>
-										</ul>                                    
-									</div>
-									<div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video  rounded-xl border">
-										<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-									</div>
-									<div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video  rounded-xl border">
-										<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-									</div>
-								</div>
-							</Card>
+							<TeamsCard teams={teams} />
 						</TabsContent>
 					</Tabs>
 				</div>

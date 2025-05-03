@@ -9,13 +9,13 @@ use App\Http\Controllers\Api\ResultsSessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-	Route::get('/allDrivers', [DriverSessionController::class, 'showAll'])
+	Route::get('/allDrivers/{limit}', [DriverSessionController::class, 'showAll'])
 	->name('allDrivers');
 
 	Route::get('/driversYear/{year}', [DriverSessionController::class, 'showByYear'])
 	->name('driversYear');
 	
-	Route::get('/allTeams', [TeamSessionController::class, 'showAll'])
+	Route::get('/allTeams/{limit}', [TeamSessionController::class, 'showAll'])
 	->name('allTeams');
 
 	Route::get('/teamsYear/{year}/{limit}', [TeamSessionController::class, 'showByYear'])
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('/driversYear/{year}/{limit}', [DriverSessionController::class, 'showByYear'])
 	->name('driversYear');
 
-	Route::get('/allTeams', [TeamSessionController::class, 'showAll'])
+	Route::get('/allTeams/{limit}', [TeamSessionController::class, 'showAll'])
 	->name('allTeams');
 
 	Route::get('/teamsYear/{year}/{limit}', [TeamSessionController::class, 'showByYear'])

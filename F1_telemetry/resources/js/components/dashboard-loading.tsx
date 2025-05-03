@@ -15,7 +15,14 @@ const breadcrumbs: BreadcrumbItem[] = [
 		href: '/dashboard',
 	},
 ];
-export function LoadingDrivers() {
+export function LoadingDashboard({ contentType }: { contentType: string }) {
+	let loadingDescription = '';
+	if(contentType == 'drivers'){
+		loadingDescription = "Drivers";
+	}else if(contentType == 'teams'){
+		loadingDescription = "Teams";
+	}
+
 	return (
 		<>
 			<AppLayout breadcrumbs={breadcrumbs} >
@@ -34,21 +41,21 @@ export function LoadingDrivers() {
 							<TabsContent value="driver">
 								<Card>
 									<CardHeader>
-										<Label htmlFor="name">Driver Search</Label>
+										<Label htmlFor="name">{loadingDescription} Search</Label>
 									</CardHeader>
 									<CardContent className="space-y-2">
 										<div className="grid auto-rows-min gap-4 md:grid-cols-3">
 											<div className="space-y-1">
 												<Select>
 													<SelectTrigger className="w-[100%]">
-														<SelectValue placeholder="Loading Drivers" />
+														<SelectValue placeholder="Loading..." />
 													</SelectTrigger>
 													<SelectContent>
 													</SelectContent>
 												</Select>
 											</div>
 											<div className="space-y-1 grid md:grid-cols-2">
-												<Button className="w-[100%]">Search Driver</Button>
+												
 											</div>
 											<div className="space-y-1 text-end">
 												<Button className="w-[50%] overflow-hidden" variant="destructive">Reset Search</Button>
@@ -58,7 +65,7 @@ export function LoadingDrivers() {
 									<ScrollArea className="h-[68vh] rounded-md border p-4">
 										<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-1 aspect-video  text-center">
 											<Skeleton className="h-[100%] w-[100%] rounded-xl" />
-											<span className='text-red-500'>Just a moment, loading list of Drivers from F1 API's database!</span>
+											<span className='text-red-500'>Just a moment, loading list of {loadingDescription} from F1 API's database!</span>
 											<div className="space-y-2">
 												<Skeleton className="h-6 w-[100%]" />
 												<Skeleton className="h-6 w-[100%]" />
