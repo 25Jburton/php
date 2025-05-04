@@ -30,6 +30,21 @@ export interface TeamsItemType {
     url: string;
 }
 
+export interface CircuitsItemType {
+    circuitId: string;
+    circuitName: string;
+    country: string;
+    city: string;
+    circuitLength: string;
+    firstParticipationYear: string;
+    lapRecord: string;
+    numberOfCorners: string;
+    fastestLapYear: string;
+    fastestLapDriverId: string;
+    fastestLapTeamId: string;
+    url: string;
+}
+
 export interface NavGroup {
     title: string;
     items: NavItem[];

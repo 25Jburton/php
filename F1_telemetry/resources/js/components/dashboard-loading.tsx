@@ -19,8 +19,8 @@ export function LoadingDashboard({ contentType }: { contentType: string }) {
 	let loadingDescription = '';
 	if(contentType == 'drivers'){
 		loadingDescription = "Drivers";
-	}else if(contentType == 'teams'){
-		loadingDescription = "Teams";
+	}else if(contentType == 'circuits'){
+		loadingDescription = "Circuits";
 	}
 
 	return (
