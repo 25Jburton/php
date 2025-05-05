@@ -27,7 +27,7 @@ export function DriverCard({ driver}: { driver: DriversItemType[]; }) {
 					</div>
 				</div>
 			</CardContent>
-			<ScrollArea className="h-[68vh] rounded-md border p-4">
+			<ScrollArea className="h-[68vh] rounded-md">
 				<DriverIndividualCard driver={driver} />
 			</ScrollArea>
 		</Card>

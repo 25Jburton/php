@@ -12,7 +12,6 @@ export function CircuitPopoverSearch({ circuit }: { circuit: CircuitsItemType[];
     const [value, setValue] = React.useState("");
     return (
         <>
-            <Label htmlFor="circuit">Search Circuits</Label>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button

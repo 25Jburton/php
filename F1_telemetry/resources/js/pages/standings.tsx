@@ -3,17 +3,12 @@ import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select";
+import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select";
 import { DriverStandingsIndividualCard } from '@/components/driver-standings-individual-card';
 import { LoadingDashboard } from '@/components/dashboard-loading';
 import { useState, useEffect } from 'react';
 import { ConstructorStandingsIndividualCard } from '@/components/construstor-standings-individual-card';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -27,7 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 
-export default function Dashboard() {
+export default function Standings() {
  	const [isLoading, setIsLoading] = useState(false);
 	const [driverStandings, setDriverStandings] = useState([]);
 	const [teamStandings, setTeamStandings] = useState([]);
@@ -88,9 +83,13 @@ export default function Dashboard() {
 						</Select>
 					</div>
 				</div>
-				<div className="grid auto-rows-min gap-4 md:grid-cols-2">
+				<div className="grid auto-rows-min gap-4 md:grid-cols-2 rounded-xl border">
+				<ScrollArea className="h-[80vh] rounded-md">
 					<DriverStandingsIndividualCard standings={driverStandings} />
+				</ScrollArea>
+				<ScrollArea className="h-[80vh] rounded-md">
 					<ConstructorStandingsIndividualCard standings={teamStandings} />
+				</ScrollArea>
 				</div>
 			</div>
 		</AppLayout>

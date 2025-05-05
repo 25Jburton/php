@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { CircuitPopoverSearch } from '@/components/circuits-popover-search';
 import { LoadingDashboard } from '@/components/dashboard-loading';
 import { CircuitIndividualCard } from '@/components/circuit-individual-card';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -53,7 +54,11 @@ export default function Circuits() {
 						<CircuitPopoverSearch circuit={circuit} />
 					</div>
 				</div>
-				<CircuitIndividualCard circuit={circuit} />
+				<div className="grid auto-rows-min gap-4 md:grid-cols-1 rounded-xl border">
+					<ScrollArea className="h-[80vh] rounded-md">
+						<CircuitIndividualCard circuit={circuit} />
+					</ScrollArea>
+				</div>
 			</div>
 		</AppLayout>
 	);
