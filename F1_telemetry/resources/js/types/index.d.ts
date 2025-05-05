@@ -30,6 +30,23 @@ export interface TeamsItemType {
     url: string;
 }
 
+export interface DriversStandingItemType {
+    classificationId: string;
+    points: string;
+    position: string;
+    wins: string;
+    driver: Array;
+    team: Array;
+}
+
+export interface ConstructorsStandingItemType {
+    classificationId: string;
+    points: string;
+    position: string;
+    wins: string;
+    team: Array;
+}
+
 export interface CircuitsItemType {
     circuitId: string;
     circuitName: string;

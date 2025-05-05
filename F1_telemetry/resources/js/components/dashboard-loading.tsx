@@ -21,6 +21,8 @@ export function LoadingDashboard({ contentType }: { contentType: string }) {
 		loadingDescription = "Drivers";
 	}else if(contentType == 'circuits'){
 		loadingDescription = "Circuits";
+	}else if(contentType == 'standings'){
+		loadingDescription = "Driver & Constructors Standings";
 	}
 
 	return (

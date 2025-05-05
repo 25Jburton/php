@@ -10,6 +10,10 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select";
+import { DriverStandingsIndividualCard } from '@/components/driver-standings-individual-card';
+import { LoadingDashboard } from '@/components/dashboard-loading';
+import { useState, useEffect } from 'react';
+import { ConstructorStandingsIndividualCard } from '@/components/construstor-standings-individual-card';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -24,7 +28,50 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 
 export default function Dashboard() {
- 
+ 	const [isLoading, setIsLoading] = useState(false);
+	const [driverStandings, setDriverStandings] = useState([]);
+	const [teamStandings, setTeamStandings] = useState([]);
+	useEffect(() => {
+		const fetchDriverData = async () => {
+			setIsLoading(true);
+			try {
+				const response = await fetch('http://f1_telemetry.test/standingsDrivers/2024/99');
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				let actualData = await response.json();
+				setDriverStandings(actualData['drivers_championship']);
+				console.log(actualData);
+			} catch (e) {
+				const error = e;
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		const fetchTeamData = async () => {
+			setIsLoading(true);
+			try {
+				const response = await fetch('http://f1_telemetry.test/standingsConstructors/2024/99');
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				let actualData = await response.json();
+				setTeamStandings(actualData['constructors_championship']);
+				console.log(actualData);
+			} catch (e) {
+				const error = e;
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchDriverData();
+		fetchTeamData();
+	}, []);
+	if (isLoading) {
+		return <LoadingDashboard contentType="standings" />
+	}
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Standings" />
@@ -42,99 +89,8 @@ export default function Dashboard() {
 					</div>
 				</div>
 				<div className="grid auto-rows-min gap-4 md:grid-cols-2">
-					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video  rounded-xl border">
-						<div className="grid auto-rows-min gap-4 md:grid-cols-1">
-							<Label htmlFor="driver">Driver Data HERE</Label>
-							<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-								<div>
-									<ul>
-										<li>position</li>
-										<li>surname , name (shortName)</li>
-										<li>nationality</li>
-										<li>number</li>
-										<li>birthday</li>
-										<li>teamName (nationality)</li>
-										<li>More Info (url)</li>
-									</ul>
-									<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-								</div>
-							</div>
-							<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-								<div>
-									<ul>
-										<li>position</li>
-										<li>surname , name (shortName)</li>
-										<li>nationality</li>
-										<li>number</li>
-										<li>birthday</li>
-										<li>teamName (nationality)</li>
-										<li>More Info (url)</li>
-									</ul>
-									<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />  
-								</div>
-							</div>
-							<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-								<div>
-									<ul>
-										<li>position</li>
-										<li>surname , name (shortName)</li>
-										<li>nationality</li>
-										<li>number</li>
-										<li>birthday</li>
-										<li>teamName (nationality)</li>
-										<li>More Info (url)</li>
-									</ul>
-									<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video rounded-xl border">
-					<div className="grid auto-rows-min gap-4 md:grid-cols-1">
-							<Label htmlFor="constructors">Constructors Data HERE</Label>
-							<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-								<div>
-									<ul>
-										<li>position</li>
-										<li>surname , name (shortName)</li>
-										<li>nationality</li>
-										<li>number</li>
-										<li>birthday</li>
-										<li>More Info (url)</li>
-									</ul>
-									<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-								</div>
-							</div>
-							<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-								<div>
-									<ul>
-										<li>position</li>
-										<li>wins</li>
-										<li>teamName</li>
-										<li>country</li>
-										<li>firstAppareance</li>
-										<li>constructorsChampionships</li>
-										<li>driversChampionships</li>
-										<li>More Info (url)</li>
-									</ul>
-									<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />  
-								</div>
-							</div>
-							<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-								<div>
-									<ul>
-										<li>position</li>
-										<li>surname , name (shortName)</li>
-										<li>nationality</li>
-										<li>number</li>
-										<li>birthday</li>
-										<li>More Info (url)</li>
-									</ul>
-									<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-								</div>
-							</div>
-						</div>
-					</div>
+					<DriverStandingsIndividualCard standings={driverStandings} />
+					<ConstructorStandingsIndividualCard standings={teamStandings} />
 				</div>
 			</div>
 		</AppLayout>
