@@ -17,9 +17,12 @@ export function ConstructorStandingsIndividualCard({ standings }: { standings: C
                                 </DrawerDescription>
                             </DrawerHeader>
                             <div className='text-center p-4 grid auto-rows-min gap-4 md:grid-cols-4 w-[100vw]'>
-                                <span>Position: {item['position']} <br/> Points: {item['points']} <br/> Wins: {item['wins']}</span>
-                                <span>Team: {item['team']['teamName']} <br/> Nationality: {item['team']['country']}</span>
-                                {item['team']['constructorsChampionships'] && <span>Constructors Championships: {item['team']['constructorsChampionships']} <br/> Drivers Championships: {item['team']['driversChampionships']}</span>}
+                                <span>
+                                    <p className='mb-1'>Position: {item['position']} </p><br/><p className='mb-1'> Points: {item['points']} </p><br/> Wins: {item['wins']}</span>
+                                <span>
+                                    <p className='mb-1'>Team: {item['team']['teamName']} </p><br/> Nationality: {item['team']['country']}
+                                </span>
+                                {item['team']['constructorsChampionships'] && <span><p className='mb-1'>Constructors Championships: {item['team']['constructorsChampionships']} </p><br/> Drivers Championships: {item['team']['driversChampionships']}</span>}
                                 <span >
                                     <a href={item['team']['url']} target='blank'>
                                         <Button variant="outline" className='text-green-500'>More Team Information</Button>

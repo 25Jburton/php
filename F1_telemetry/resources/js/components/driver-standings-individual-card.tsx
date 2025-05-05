@@ -17,13 +17,20 @@ export function DriverStandingsIndividualCard({ standings }: { standings: Driver
                                 </DrawerDescription>
                             </DrawerHeader>
                             <div className='text-center p-4 grid auto-rows-min gap-4 md:grid-cols-4 w-[100vw]'>
-                                <span>Position: {item['position']} <br/> Points: {item['points']} <br/> Wins: {item['wins']}</span>
-                                <span>Driver: {item['driver']['name']} {item['driver']['surname']} <br/> Nationality: {item['driver']['nationality']}</span>
-                                <span>Team: {item['team']['teamName']} <br/> Nationality: {item['team']['country']}</span>
-                                <span >
+                                <span> 
+                                    <p className='mb-1'>Position: {item['position']} </p><br/><p className='mb-1'> Points: {item['points']} </p><br/> Wins: {item['wins']}
+                                </span>
+                                <span> 
+                                    <p className='mb-1'>Driver: {item['driver']['name']} {item['driver']['surname']} </p><br/> Nationality: {item['driver']['nationality']}
+                                </span>
+                                <span> 
+                                    <p className='mb-1'>Team: {item['team']['teamName']} </p><br/> Nationality: {item['team']['country']}
+                                </span>
+                                <span>
                                     <a href={item['driver']['url']} target='blank'>
-                                        <Button variant="outline" className='text-green-500'>More Driver Information</Button>
+                                        <Button variant="outline" className='text-green-500 mb-3'>More Driver Information</Button>
                                     </a>
+                                    <br/>
                                     <a href={item['team']['url']} target='blank'>
                                         <Button variant="outline" className='text-green-500'>More Team Information</Button>
                                     </a>
