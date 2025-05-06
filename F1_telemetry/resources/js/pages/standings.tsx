@@ -1,12 +1,10 @@
-import { Label } from '@/components/ui/label';
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select";
 import { DriverStandingsIndividualCard } from '@/components/driver-standings-individual-card';
 import { LoadingCard } from '@/components/loading-card';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { ConstructorStandingsIndividualCard } from '@/components/construstor-standings-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -26,17 +24,17 @@ export default function Standings() {
  	const [isLoading, setIsLoading] = useState(false);
 	const [driverStandings, setDriverStandings] = useState([]);
 	const [teamStandings, setTeamStandings] = useState([]);
+	const [year, setYear] = useState('2025');
 	useEffect(() => {
 		const fetchDriverData = async () => {
 			setIsLoading(true);
 			try {
-				const response = await fetch('http://f1_telemetry.test/standingsDrivers/2024/99');
+				const response = await fetch('http://f1_telemetry.test/standingsDrivers/'+year+'/99');
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 				let actualData = await response.json();
 				setDriverStandings(actualData['drivers_championship']);
-				console.log(actualData);
 			} catch (e) {
 				const error = e;
 			} finally {
@@ -47,13 +45,12 @@ export default function Standings() {
 		const fetchTeamData = async () => {
 			setIsLoading(true);
 			try {
-				const response = await fetch('http://f1_telemetry.test/standingsConstructors/2024/99');
+				const response = await fetch('http://f1_telemetry.test/standingsConstructors/'+year+'/99');
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 				let actualData = await response.json();
 				setTeamStandings(actualData['constructors_championship']);
-				console.log(actualData);
 			} catch (e) {
 				const error = e;
 			} finally {
@@ -63,22 +60,34 @@ export default function Standings() {
 
 		fetchDriverData();
 		fetchTeamData();
-	}, []);
+	}, [year]);
 	if (isLoading) {
 		return <LoadingCard contentType="standings" />
 	}
+
+	const currentYear = new Date().getFullYear();
+	const years = [];
+	for(var i=1950; i < currentYear; i++){
+		years.push(i.toString());
+	}
+
+	const handleChange  = (value: any) => {
+		setYear(value);
+	  };
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Standings" />
 			<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
 				<div className="grid auto-rows-min gap-4 md:grid-cols-1">
 					<div className="space-y-1">
-						<Select>
-							<SelectTrigger className="w-[100%]">
-								<SelectValue placeholder="Year" />
+						<Select onValueChange={handleChange}>
+							<SelectTrigger className="w-[20%]">
+								<SelectValue placeholder={year}/>
 							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="2025">2025</SelectItem>
+							<SelectContent onSelect={handleChange}>
+							{years.map((year) => (
+								<SelectItem value={year}>{year}</SelectItem>
+							))}
 							</SelectContent>
 						</Select>
 					</div>
