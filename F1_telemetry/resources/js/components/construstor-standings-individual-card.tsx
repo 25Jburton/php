@@ -5,7 +5,7 @@ import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHe
 export function ConstructorStandingsIndividualCard({ standings }: { standings: ConstructorsStandingItemType[] }) {
     return (
         <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
-            {standings.map((item) => (
+            {standings && standings.map((item) => (
                 <div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
                     <Drawer>
                         <DrawerTrigger className="p-4 rounded-xl hover:bg-red-500 hover:text-accent-foreground ">{item['position']} - {item['team']['teamName']}</DrawerTrigger>
