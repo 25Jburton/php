@@ -7,20 +7,10 @@ import { LoadingCard } from '@/components/loading-card';
 import { useState, useEffect, ChangeEvent } from 'react';
 import { ConstructorStandingsIndividualCard } from '@/components/construstor-standings-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
-const breadcrumbs: BreadcrumbItem[] = [
-	{
-		title: 'Dashboard',
-		href: '/dashboard',
-	},
-	{
-		title: 'Standings',
-		href: '/standings',
-	},
-];
-
+import { ErrorLoadingCard } from '@/components/error-loading-card';
 
 export default function Standings() {
+	const [error, setError] = useState<string | null>(null);
  	const [isLoading, setIsLoading] = useState(false);
 	const [driverStandings, setDriverStandings] = useState([]);
 	const [teamStandings, setTeamStandings] = useState([]);
@@ -35,8 +25,8 @@ export default function Standings() {
 				}
 				let actualData = await response.json();
 				setDriverStandings(actualData['drivers_championship']);
-			} catch (e) {
-				const error = e;
+			} catch (e:any) {
+				setError(e.message);
 			} finally {
 				setIsLoading(false);
 			}
@@ -51,8 +41,8 @@ export default function Standings() {
 				}
 				let actualData = await response.json();
 				setTeamStandings(actualData['constructors_championship']);
-			} catch (e) {
-				const error = e;
+			} catch (e:any) {
+				setError(e.message);
 			} finally {
 				setIsLoading(false);
 			}
@@ -64,6 +54,9 @@ export default function Standings() {
 	if (isLoading) {
 		return <LoadingCard contentType="standings" />
 	}
+	if (error) {
+		return <ErrorLoadingCard contentMsg={error} />
+	}
 
 	const currentYear = new Date().getFullYear();
 	const years = [];
@@ -74,6 +67,18 @@ export default function Standings() {
 	const handleChange  = (value: any) => {
 		setYear(value);
 	  };
+
+
+	const breadcrumbs: BreadcrumbItem[] = [
+		{
+			title: 'Dashboard',
+			href: '/dashboard',
+		},
+		{
+			title: 'Standings '+year,
+			href: '/standings '+year,
+		},
+	];
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Standings" />
@@ -81,7 +86,7 @@ export default function Standings() {
 				<div className="grid auto-rows-min gap-4 md:grid-cols-1">
 					<div className="space-y-1">
 						<Select onValueChange={handleChange}>
-							<SelectTrigger className="w-[20%]">
+							<SelectTrigger className="w-[10%]">
 								<SelectValue placeholder={year}/>
 							</SelectTrigger>
 							<SelectContent onSelect={handleChange}>
