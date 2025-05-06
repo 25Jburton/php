@@ -4,7 +4,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import React, { useState, useEffect } from 'react';
 import { CircuitPopoverSearch } from '@/components/circuits-popover-search';
-import { LoadingDashboard } from '@/components/dashboard-loading';
+import { LoadingCard } from '@/components/loading-card';
 import { CircuitIndividualCard } from '@/components/circuit-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -42,7 +42,7 @@ export default function Circuits() {
 		fetchData();
 	}, []);
 	if (isLoading) {
-		return <LoadingDashboard contentType="circuits" />
+		return <LoadingCard contentType="circuits" />
 	}
 
 	return (

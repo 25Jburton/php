@@ -3,7 +3,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import React, { useState, useEffect } from 'react';
-import { LoadingDashboard } from '@/components/dashboard-loading';
+import { LoadingCard } from '@/components/loading-card';
 import { DriverCard } from '@/components/dashboard-driver-card';
 import { TeamsCard } from '@/components/dashboard-team-card';
 
@@ -39,7 +39,7 @@ export default function Dashboard() {
 	}, []);
 
 	if (isLoadingDrivers) {
-		return <LoadingDashboard contentType="drivers" />
+		return <LoadingCard contentType="drivers" />
 	}
 
 	function clickTeamTab() {

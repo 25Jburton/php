@@ -5,7 +5,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select";
 import { DriverStandingsIndividualCard } from '@/components/driver-standings-individual-card';
-import { LoadingDashboard } from '@/components/dashboard-loading';
+import { LoadingCard } from '@/components/loading-card';
 import { useState, useEffect } from 'react';
 import { ConstructorStandingsIndividualCard } from '@/components/construstor-standings-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -65,7 +65,7 @@ export default function Standings() {
 		fetchTeamData();
 	}, []);
 	if (isLoading) {
-		return <LoadingDashboard contentType="standings" />
+		return <LoadingCard contentType="standings" />
 	}
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
