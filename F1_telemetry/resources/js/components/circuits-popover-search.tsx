@@ -11,7 +11,7 @@ export function CircuitPopoverSearch({ circuit }: { circuit: CircuitsItemType[];
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState("");
     return (
-        <>
+        <div className="w-[80%]">
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
@@ -53,6 +53,6 @@ export function CircuitPopoverSearch({ circuit }: { circuit: CircuitsItemType[];
                     </Command>
                 </PopoverContent>
             </Popover>
-        </>
+        </div>
     );
 }

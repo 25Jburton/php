@@ -66,7 +66,7 @@ export default function Standings() {
 
 	const handleChange  = (value: any) => {
 		setYear(value);
-	  };
+	};
 
 
 	const breadcrumbs: BreadcrumbItem[] = [
