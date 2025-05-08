@@ -11,6 +11,7 @@ import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} 
 import { Button } from '@/components/ui/button';
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CardContent } from "@/components/ui/card";
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -89,64 +90,70 @@ export default function Circuits() {
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Circuits" />
-			<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-				<Popover open={open} onOpenChange={setOpen}>
-					<PopoverTrigger asChild>
-						<Button
-						variant="outline"
-						role="combobox"
-						aria-expanded={open}
-						className="w-[100%] justify-between"
-						>
-						{circuitValue ? circuit.find((item) => item['circuitName']  === circuitValue)?circuitValue: "Searching circuits": "Search circuits"}
-						<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-						</Button>
-					</PopoverTrigger>
-					<PopoverContent className="w-[100%] p-0">
-						<Command>
-						<CommandInput placeholder="Search circuits..." />
-						<CommandList>
-							<CommandEmpty>No circuits found.</CommandEmpty>
-							<CommandGroup>
-							{circuit.map((item) => (
-								<CommandItem
-								key={item['circuitId']}
-								value={item['circuitName'] }
-								onSelect={(currentValue) => {
-									setCircuitValue(currentValue === circuitValue ? "" : currentValue)
-									setOpen(false)
-								}}
-								>
-								<Check
-									className={cn(
-									"mr-2 h-4 w-4",
-									circuitValue === item['circuitId'] ? "opacity-100" : "opacity-0"
-									)}
-								/>
-								{item['circuitName']}
-								</CommandItem>
-							))}
-							</CommandGroup>
-						</CommandList>
-						</Command>
-					</PopoverContent>
-				</Popover>
-				<Button variant="destructive" onClick={handleReset} id="resetSearch">
-					Reset Search
-				</Button>					
-				{/* <CircuitPopoverSearch circuit={circuit} /> */}
-				<div className="grid auto-rows-min gap-4 md:grid-cols-3">
-					<Select onValueChange={handleChange}>
-						<SelectTrigger className="w-[25%]">
-							<SelectValue placeholder={count}/>
-						</SelectTrigger>
-						<SelectContent>
-						{totalCount.map((displayAmount) => (
-							<SelectItem value={displayAmount}>{displayAmount}</SelectItem>
-						))}
-						</SelectContent>
-					</Select>
-				</div>
+			<div>
+				<CardContent className="space-y-2 m-2">
+					<div className="grid auto-rows-min gap-4 md:grid-cols-3">
+						<div className="space-y-1">
+							<Popover open={open} onOpenChange={setOpen}>
+								<PopoverTrigger asChild>
+									<Button
+									variant="outline"
+									role="combobox"
+									aria-expanded={open}
+									className="w-[100%] justify-between"
+									>
+									{circuitValue ? circuit.find((item) => item['circuitName']  === circuitValue)?circuitValue: "Searching circuits": "Search circuits"}
+									<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+									</Button>
+								</PopoverTrigger>
+								<PopoverContent className="w-[100%] p-0">
+									<Command>
+									<CommandInput placeholder="Search circuits..." />
+									<CommandList>
+										<CommandEmpty>No circuits found.</CommandEmpty>
+										<CommandGroup>
+										{circuit.map((item) => (
+											<CommandItem
+											key={item['circuitId']}
+											value={item['circuitName'] }
+											onSelect={(currentValue) => {
+												setCircuitValue(currentValue === circuitValue ? "" : currentValue)
+												setOpen(false)
+											}}
+											>
+											<Check
+												className={cn(
+												"mr-2 h-4 w-4",
+												circuitValue === item['circuitId'] ? "opacity-100" : "opacity-0"
+												)}
+											/>
+											{item['circuitName']}
+											</CommandItem>
+										))}
+										</CommandGroup>
+									</CommandList>
+									</Command>
+								</PopoverContent>
+							</Popover>
+						</div>
+						<div className="space-y-1 grid md:grid-cols-2">
+							<Select onValueChange={handleChange}>
+								<SelectTrigger className="w-[50%]">
+									<SelectValue placeholder={count}/>
+								</SelectTrigger>
+								<SelectContent>
+								{totalCount.map((displayAmount) => (
+									<SelectItem value={displayAmount}>{displayAmount}</SelectItem>
+								))}
+								</SelectContent>
+							</Select>
+						</div>
+						<div className="space-y-1 text-end">
+							<Button className="w-[50%] overflow-hidden" variant="destructive" onClick={handleReset}>Reset Search</Button>
+						</div>
+					</div>
+				</CardContent>
+
 				<div className="grid auto-rows-min gap-4 md:grid-cols-1 rounded-xl border">
 					<ScrollArea className="h-[80vh] rounded-md">
 						<CircuitIndividualCard circuit={circuit} circuitSearch={circuitSearch}/>
