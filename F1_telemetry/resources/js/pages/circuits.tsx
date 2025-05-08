@@ -2,11 +2,15 @@ import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/compo
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import React, { useState, useEffect } from 'react';
-import { CircuitPopoverSearch } from '@/components/circuits-popover-search';
+import { useState, useEffect } from 'react';
 import { LoadingCard } from '@/components/loading-card';
 import { CircuitIndividualCard } from '@/components/circuit-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
+import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
+import { Button } from '@/components/ui/button';
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -22,46 +26,116 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Circuits() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [circuit, setCircuit] = useState([]);
+	const [circuitSearch, setCircuitSearch] = useState([]);
 	const [count, setCount] = useState('1000');
+	const [open, setOpen] = useState(false);
+	const [circuitValue, setCircuitValue] = useState("");
 
  	useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true);
-			try {
-				const response = await fetch('http://f1_telemetry.test/allCircuits/'+count);
-				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`);
+			if(circuitValue){
+				try {
+					const response = await fetch('http://f1_telemetry.test/getCircuit/'+encodeURIComponent(circuitValue));
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					console.log('http://f1_telemetry.test/getCircuit/'+encodeURIComponent(circuitValue));
+					let searchData = await response.json();
+					setCircuitSearch(searchData['circuits']);
+
+					const responseAll = await fetch('http://f1_telemetry.test/allCircuits/'+count);
+					if (!responseAll.ok) {
+						throw new Error(`HTTP error! status: ${responseAll.status}`);
+					}
+					let actualData = await responseAll.json();
+					setCircuit(actualData['circuits']);
+
+
+
+				} catch (e) {
+					const error = e;
+				} finally {
+					setIsLoading(false);
 				}
-				let actualData = await response.json();
-				setCircuit(actualData['circuits']);
-			} catch (e) {
-				const error = e;
-			} finally {
-				setIsLoading(false);
+			}else{
+				try {
+					const response = await fetch('http://f1_telemetry.test/allCircuits/'+count);
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					let actualData = await response.json();
+					setCircuit(actualData['circuits']);
+				} catch (e) {
+					const error = e;
+				} finally {
+					setIsLoading(false);
+				}
 			}
 		};
 		fetchData();
-	}, [count]);
+	}, [count, circuitValue]);
 	if (isLoading) {
 		return <LoadingCard contentType="circuits" />
 	}
 
 	const totalCount = ['10','25','50','100','500'];
-	const handleChange  = (value: any) => {
-		setCount(value);
+	const handleChange  = (yearValue: any) => {
+		setCount(yearValue);
 	};
 
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Circuits" />
-			<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">					
-				<CircuitPopoverSearch circuit={circuit} />
+			<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+				<Popover open={open} onOpenChange={setOpen}>
+					<PopoverTrigger asChild>
+						<Button
+						variant="outline"
+						role="combobox"
+						aria-expanded={open}
+						className="w-[100%] justify-between"
+						>
+						{circuitValue ? circuit.find((item) => item['circuitName']  === circuitValue)?circuitValue: "Searching circuits": "Search circuits"}
+						<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className="w-[100%] p-0">
+						<Command>
+						<CommandInput placeholder="Search circuits..." />
+						<CommandList>
+							<CommandEmpty>No circuits found.</CommandEmpty>
+							<CommandGroup>
+							{circuit.map((item) => (
+								<CommandItem
+								key={item['circuitId']}
+								value={item['circuitName'] }
+								onSelect={(currentValue) => {
+									setCircuitValue(currentValue === circuitValue ? "" : currentValue)
+									setOpen(false)
+								}}
+								>
+								<Check
+									className={cn(
+									"mr-2 h-4 w-4",
+									circuitValue === item['circuitId'] ? "opacity-100" : "opacity-0"
+									)}
+								/>
+								{item['circuitName']}
+								</CommandItem>
+							))}
+							</CommandGroup>
+						</CommandList>
+						</Command>
+					</PopoverContent>
+				</Popover>					
+				{/* <CircuitPopoverSearch circuit={circuit} /> */}
 				<div className="grid auto-rows-min gap-4 md:grid-cols-3">
 					<Select onValueChange={handleChange}>
 						<SelectTrigger className="w-[25%]">
 							<SelectValue placeholder={count}/>
 						</SelectTrigger>
-						<SelectContent onSelect={handleChange}>
+						<SelectContent>
 						{totalCount.map((displayAmount) => (
 							<SelectItem value={displayAmount}>{displayAmount}</SelectItem>
 						))}
@@ -70,7 +144,7 @@ export default function Circuits() {
 				</div>
 				<div className="grid auto-rows-min gap-4 md:grid-cols-1 rounded-xl border">
 					<ScrollArea className="h-[80vh] rounded-md">
-						<CircuitIndividualCard circuit={circuit} />
+						<CircuitIndividualCard circuit={circuit} circuitSearch={circuitSearch}/>
 					</ScrollArea>
 				</div>
 			</div>

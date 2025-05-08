@@ -43,6 +43,9 @@ Route::middleware('auth')->group(function () {
 	Route::get('/allCircuits/{limit}', [CircuitsSessionController::class, 'showAll'])
 	->name('allCircuits');
 
+	Route::get('/getCircuit/{query}', [CircuitsSessionController::class, 'showCircuit'])
+	->name('getCircuit');
+
 	Route::get('/standingsDrivers/{year}/{limit}', [StandingsSessionController::class, 'showAllDrivers'])
 	->name('standingsDrivers');
 

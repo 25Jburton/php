@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { type CircuitsItemType } from '@/types';
 import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
 
-export function CircuitIndividualCard({ circuit }: { circuit: CircuitsItemType[] }) {
+export function CircuitIndividualCard({ circuit, circuitSearch }: { circuit: CircuitsItemType[], circuitSearch: CircuitsItemType[] }) {
 
     function getKmLength(length:string){
         return parseInt(length) / 100;
@@ -10,6 +10,10 @@ export function CircuitIndividualCard({ circuit }: { circuit: CircuitsItemType[]
     function getMileLength(length:string){
         let lengthKm = parseInt(length) / 100;
         return (lengthKm / 1.60934).toFixed(2);
+    }
+
+    if(circuitSearch.length > 0){
+        circuit = circuitSearch;
     }
     return (
         <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-6">
