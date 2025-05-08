@@ -50,9 +50,6 @@ export default function Circuits() {
 					}
 					let actualData = await responseAll.json();
 					setCircuit(actualData['circuits']);
-
-
-
 				} catch (e) {
 					const error = e;
 				} finally {
@@ -82,6 +79,11 @@ export default function Circuits() {
 	const totalCount = ['10','25','50','100','500'];
 	const handleChange  = (yearValue: any) => {
 		setCount(yearValue);
+	};
+
+	const handleReset  = () => {
+		setCircuitValue("");
+		setCircuitSearch([]);
 	};
 
 	return (
@@ -128,7 +130,10 @@ export default function Circuits() {
 						</CommandList>
 						</Command>
 					</PopoverContent>
-				</Popover>					
+				</Popover>
+				<Button variant="destructive" onClick={handleReset} id="resetSearch">
+					Reset Search
+				</Button>					
 				{/* <CircuitPopoverSearch circuit={circuit} /> */}
 				<div className="grid auto-rows-min gap-4 md:grid-cols-3">
 					<Select onValueChange={handleChange}>
