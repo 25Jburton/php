@@ -100,14 +100,6 @@ export function CircuitIndividualCard({ circuit, circuitSearch }: { circuit: Cir
 									<CarouselPrevious />
 									<CarouselNext />
 								</Carousel>
-								{/* <span>Country: {item['country']} <br/> City: {item['city']}</span>
-								{item['circuitLength'] && <span>Circuit Length {getKmLength(item['circuitLength'])} Km ({getMileLength(item['circuitLength'])} Miles)</span>}
-								{item['numberOfCorners'] && <span>Number Of Corners: {item['numberOfCorners']}</span>}
-								{item['firstParticipationYear'] && <span>First Year: {item['firstParticipationYear']}</span>}
-								<span>
-									{item['lapRecord'] && <span>Lap Record: {item['lapRecord']} - {item['fastestLapYear']}</span>}
-									{item['fastestLapDriverId'] && <span><br/>Driver: {item['fastestLapDriverId']} <br/> Team: {item['fastestLapTeamId']}</span>}
-								</span> */}
 								<div></div>
 							</div>
 							<div className='text-center p-4 grid auto-rows-min gap-4 md:grid-cols-1'>
