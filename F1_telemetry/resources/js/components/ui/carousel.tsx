@@ -182,6 +182,7 @@ function CarouselPrevious({
       data-slot="carousel-previous"
       variant={variant}
       size={size}
+      style={{cursor:'pointer'}}
       className={cn(
         "absolute size-8 rounded-full bg-destructive text-white shadow-xs hover:bg-secondary/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         orientation === "horizontal"
@@ -212,6 +213,7 @@ function CarouselNext({
       data-slot="carousel-next"
       variant={variant}
       size={size}
+      style={{cursor:'pointer'}}
       className={cn(
         "absolute size-8 rounded-full bg-destructive text-white shadow-xs hover:bg-secondary/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         orientation === "horizontal"

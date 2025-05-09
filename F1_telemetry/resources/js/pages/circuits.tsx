@@ -100,6 +100,7 @@ export default function Circuits() {
 									variant="outline"
 									role="combobox"
 									aria-expanded={open}
+									style={{cursor:'pointer'}}
 									className="w-[100%] justify-between"
 									>
 									{circuitValue ? circuit.find((item) => item['circuitName']  === circuitValue)?circuitValue: "Searching circuits": "Search circuits"}
@@ -114,6 +115,7 @@ export default function Circuits() {
 										<CommandGroup>
 										{circuit.map((item) => (
 											<CommandItem
+											style={{cursor:'pointer'}}
 											key={item['circuitId']}
 											value={item['circuitName'] }
 											onSelect={(currentValue) => {
