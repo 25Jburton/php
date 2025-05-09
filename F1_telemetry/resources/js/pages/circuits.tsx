@@ -91,7 +91,7 @@ export default function Circuits() {
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Circuits" />
 			<div>
-				<CardContent className="space-y-2 m-2">
+				<CardContent className="space-y-2 p-4">
 					<div className="grid auto-rows-min gap-4 md:grid-cols-3">
 						<div className="space-y-1">
 							<Popover open={open} onOpenChange={setOpen}>
@@ -143,7 +143,7 @@ export default function Circuits() {
 								</SelectTrigger>
 								<SelectContent>
 								{totalCount.map((displayAmount) => (
-									<SelectItem value={displayAmount}>{displayAmount}</SelectItem>
+									<SelectItem value={displayAmount} key={displayAmount}>{displayAmount}</SelectItem>
 								))}
 								</SelectContent>
 							</Select>
