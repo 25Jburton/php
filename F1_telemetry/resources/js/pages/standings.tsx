@@ -99,7 +99,7 @@ export default function Standings() {
 				</div>
 				<div className="grid auto-rows-min gap-4 md:grid-cols-2 rounded-xl border">
 				<ScrollArea className="h-[80vh] rounded-md">
-					<DriverStandingsIndividualCard standings={driverStandings} />
+					<DriverStandingsIndividualCard standings={driverStandings} year={year} />
 				</ScrollArea>
 				<ScrollArea className="h-[80vh] rounded-md">
 					<ConstructorStandingsIndividualCard standings={teamStandings} />
