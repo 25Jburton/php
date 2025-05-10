@@ -3,7 +3,8 @@ import { type DriversStandingItemType } from '@/types';
 import {Dialog,DialogContent,DialogDescription,DialogFooter,DialogHeader,DialogTitle,DialogTrigger} from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { Icon } from './ui/icon';
-import { CrownIcon, Trophy } from 'lucide-react';
+import { CrownIcon } from 'lucide-react';
+import { Badge } from "@/components/ui/badge"
 export function DriverStandingsIndividualCard({ standings, year }: { standings: DriversStandingItemType[], year:string }) {
 	return (
 		<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
@@ -11,8 +12,11 @@ export function DriverStandingsIndividualCard({ standings, year }: { standings: 
 				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
 				<Dialog>
 					<DialogTrigger asChild>
-						<Button variant="ghost"><Label className="text-right">{item['position']}</Label> {item['driver']['name']} {item['driver']['surname']}</Button>
+						<Button variant="ghost"><Label className="text-right">{item['position']}</Label> {item['driver']['name']} {item['driver']['surname']}
+						</Button>
 					</DialogTrigger>
+						<br/>
+						<Badge>{item['team']['teamName']}</Badge>
 					<DialogContent className="sm:max-w-[425px]">
 						<DialogHeader>
 							<DialogTitle>{item['driver']['name']} {item['driver']['surname']} - {item['driver']['nationality']}</DialogTitle>
