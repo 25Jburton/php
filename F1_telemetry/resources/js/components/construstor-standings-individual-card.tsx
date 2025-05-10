@@ -5,6 +5,7 @@ import {Dialog,DialogContent,DialogDescription,DialogFooter,DialogHeader,DialogT
 import { Label } from "@/components/ui/label"
 import { Icon } from './icon';
 import {CrownIcon, Trophy } from 'lucide-react';
+import { Badge } from './ui/badge';
 export function ConstructorStandingsIndividualCard({ standings, year }: { standings: ConstructorsStandingItemType[], year: string }) {
 	return (
 		<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
@@ -14,6 +15,8 @@ export function ConstructorStandingsIndividualCard({ standings, year }: { standi
 						<DialogTrigger asChild>
 							<Button variant="ghost"><Label className="text-right">{item['position']}</Label> {item['team']['teamName']}</Button>
 						</DialogTrigger>
+							<br/>
+							<Badge>{item['points']}</Badge>
 						<DialogContent className="sm:max-w-[425px]">
 							<DialogHeader>
 								<DialogTitle>{item['team']['teamName']} - {item['team']['country']}</DialogTitle>

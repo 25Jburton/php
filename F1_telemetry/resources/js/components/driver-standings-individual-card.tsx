@@ -16,7 +16,9 @@ export function DriverStandingsIndividualCard({ standings, year }: { standings: 
 						</Button>
 					</DialogTrigger>
 						<br/>
-						<Badge>{item['team']['teamName']}</Badge>
+						<Badge>{item['points']}</Badge>
+						<br/>
+						<Badge variant="outline">{item['team']['teamName']}</Badge>
 					<DialogContent className="sm:max-w-[425px]">
 						<DialogHeader>
 							<DialogTitle>{item['driver']['name']} {item['driver']['surname']} - {item['driver']['nationality']}</DialogTitle>
