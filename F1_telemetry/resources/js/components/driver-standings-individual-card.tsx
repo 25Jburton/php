@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { type DriversStandingItemType } from '@/types';
 import {Dialog,DialogContent,DialogDescription,DialogFooter,DialogHeader,DialogTitle,DialogTrigger} from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
+import { Icon } from './ui/icon';
+import { CrownIcon, Trophy } from 'lucide-react';
 export function DriverStandingsIndividualCard({ standings, year }: { standings: DriversStandingItemType[], year:string }) {
 	return (
 		<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
@@ -36,13 +38,30 @@ export function DriverStandingsIndividualCard({ standings, year }: { standings: 
 								<span>
 									<p className='mb-1'>{item['points']} </p>
 								</span>
-
-								<Label className="text-right">
+								
+								<Label htmlFor="name" className="text-center">
 									Wins
+									<br/>
+									<p className='mb-1 p-4'>
+										{parseInt(item['wins']) > 0 ? item['wins'] : 0} 
+									</p>
 								</Label>
-								<span>
-									<p className='mb-1'>{parseInt(item['wins']) > 0 ? item['wins'] : 0} </p>
+								<span> 
+									<p className='mb-1 p-4'>
+										{(() => {
+											const elements = [];
+											for (let i = 0; i < parseInt(item['wins']); i++) {
+												elements.push(<Icon iconNode={CrownIcon}></Icon>);
+											}
+											return elements;
+										})()}
+									</p>
 								</span>
+
+
+
+
+
 							</div>
 							<div className="grid grid-cols-1 items-center gap-4 text-center">
 								<span>

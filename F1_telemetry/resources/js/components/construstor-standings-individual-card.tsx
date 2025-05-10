@@ -4,7 +4,7 @@ import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHe
 import {Dialog,DialogContent,DialogDescription,DialogFooter,DialogHeader,DialogTitle,DialogTrigger} from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { Icon } from './icon';
-import {Trophy } from 'lucide-react';
+import {CrownIcon, Trophy } from 'lucide-react';
 export function ConstructorStandingsIndividualCard({ standings, year }: { standings: ConstructorsStandingItemType[], year: string }) {
 	return (
 		<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
@@ -79,7 +79,7 @@ export function ConstructorStandingsIndividualCard({ standings, year }: { standi
 											{(() => {
 												const elements = [];
 												for (let i = 0; i < parseInt(item['team']['driversChampionships']); i++) {
-													elements.push(<Icon iconNode={Trophy}></Icon>);
+													elements.push(<Icon iconNode={CrownIcon}></Icon>);
 												}
 												return elements;
 											})()}
