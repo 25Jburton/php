@@ -10,15 +10,18 @@ export function DriverStandingsIndividualCard({ standings, year }: { standings: 
 		<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
 			{standings && standings.map((item) => (
 				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
+					<Label className="text-right">{item['position']}</Label>
+						<br/>
+					<Badge variant="outline" className='p-4 m-3'>
+						{item['points']} Points 
+							<br/> 
+						{item['team']['teamName']}
+					</Badge>
+						<br/>
 				<Dialog>
-					<DialogTrigger asChild>
-						<Button variant="ghost"><Label className="text-right">{item['position']}</Label> {item['driver']['name']} {item['driver']['surname']}
-						</Button>
+					<DialogTrigger asChild className='p-4'>
+						<Button variant="destructive">{item['driver']['name']} {item['driver']['surname']}</Button>
 					</DialogTrigger>
-						<br/>
-						<Badge>{item['points']}</Badge>
-						<br/>
-						<Badge variant="outline">{item['team']['teamName']}</Badge>
 					<DialogContent className="sm:max-w-[425px]">
 						<DialogHeader>
 							<DialogTitle>{item['driver']['name']} {item['driver']['surname']} - {item['driver']['nationality']}</DialogTitle>

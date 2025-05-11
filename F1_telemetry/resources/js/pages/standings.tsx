@@ -8,6 +8,7 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { ConstructorStandingsIndividualCard } from '@/components/construstor-standings-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ErrorLoadingCard } from '@/components/error-loading-card';
+import { Label } from '@/components/ui/label';
 
 export default function Standings() {
 	const [error, setError] = useState<string | null>(null);
@@ -98,11 +99,35 @@ export default function Standings() {
 					</div>
 				</div>
 				<div className="grid auto-rows-min gap-4 md:grid-cols-2 rounded-xl border">
-				<ScrollArea className="h-[80vh] rounded-md">
+				<ScrollArea className="h-[80vh] rounded-md text-center">
+							{(() => {
+								if(driverStandings[0]){
+									let result = [];
+									let driver_name = driverStandings[0]['driver']['name'] +' '+driverStandings[0]['driver']['surname'];
+									if(currentYear > parseInt(year)){
+										result.push(<Label className='m-3'>Driver Champion: {driver_name}</Label>);
+									}else{
+										result.push(<Label className='m-3'>Leader: {driver_name}</Label>);
+									}
+									return result;
+								}
+							})()}
 					<DriverStandingsIndividualCard standings={driverStandings} year={year} />
 				</ScrollArea>
-				<ScrollArea className="h-[80vh] rounded-md">
-					<ConstructorStandingsIndividualCard standings={teamStandings} />
+				<ScrollArea className="h-[80vh] rounded-md text-center">
+					{(() => {
+						if(teamStandings != undefined){
+							let result = [];
+							let team_name = teamStandings[0]['team']['teamName'] ;
+							if(currentYear > parseInt(year)){
+								result.push(<Label className='m-3'>Constructor Champion: {team_name}</Label>);
+							}else{
+								result.push(<Label className='m-3'>Leader: {team_name}</Label>);
+							}
+							return result;
+						}
+					})()}
+					<ConstructorStandingsIndividualCard standings={teamStandings} year={year} />
 				</ScrollArea>
 				</div>
 			</div>
