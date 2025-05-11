@@ -9,6 +9,8 @@ import { ConstructorStandingsIndividualCard } from '@/components/construstor-sta
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ErrorLoadingCard } from '@/components/error-loading-card';
 import { Label } from '@/components/ui/label';
+import { CrownIcon, Trophy } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
 
 export default function Standings() {
 	const [error, setError] = useState<string | null>(null);
@@ -105,7 +107,7 @@ export default function Standings() {
 									let result = [];
 									let driver_name = driverStandings[0]['driver']['name'] +' '+driverStandings[0]['driver']['surname'];
 									if(currentYear > parseInt(year)){
-										result.push(<Label className='m-3'>Driver Champion: {driver_name}</Label>);
+										result.push(<Label className='m-3'>Driver Champion: {driver_name} <Icon iconNode={CrownIcon}></Icon></Label>);
 									}else{
 										result.push(<Label className='m-3'>Leader: {driver_name}</Label>);
 									}
@@ -115,18 +117,6 @@ export default function Standings() {
 					<DriverStandingsIndividualCard standings={driverStandings} year={year} />
 				</ScrollArea>
 				<ScrollArea className="h-[80vh] rounded-md text-center">
-					{(() => {
-						if(teamStandings != undefined){
-							let result = [];
-							let team_name = teamStandings[0]['team']['teamName'] ;
-							if(currentYear > parseInt(year)){
-								result.push(<Label className='m-3'>Constructor Champion: {team_name}</Label>);
-							}else{
-								result.push(<Label className='m-3'>Leader: {team_name}</Label>);
-							}
-							return result;
-						}
-					})()}
 					<ConstructorStandingsIndividualCard standings={teamStandings} year={year} />
 				</ScrollArea>
 				</div>
