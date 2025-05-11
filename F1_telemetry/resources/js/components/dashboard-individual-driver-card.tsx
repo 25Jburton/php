@@ -1,14 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { type DriversItemType as DriversItemType } from '@/types';
 import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
+import { Badge } from './ui/badge';
 
 export function DriverIndividualCard({ driver }: { driver: DriversItemType[] }) {
     return (
-        <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-6">
+        <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-4">
             {driver.map((item) => (
                 <div className="border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
                     <Drawer>
-                        <DrawerTrigger className="p-4 rounded-xl hover:bg-red-500 hover:text-accent-foreground ">{item['name']} {item['surname']}</DrawerTrigger>
+                        <DrawerTrigger className="p-4 rounded-xl hover:bg-red-500 hover:text-accent-foreground ">
+                            <Badge>{item['nationality']}</Badge><br/>{item['name']} {item['surname']}
+                        </DrawerTrigger>
                         <DrawerContent>
                             <DrawerHeader className='text-center'>
                                 <DrawerTitle><h1>{item['name']} {item['surname']}</h1></DrawerTitle>

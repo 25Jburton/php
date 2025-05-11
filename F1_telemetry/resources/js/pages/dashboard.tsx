@@ -19,31 +19,28 @@ export default function Dashboard() {
 	const [teams, setTeams] = useState([]);
 	const [isLoadingDrivers, setIsLoadingDrivers] = useState(false);
 	const [isLoadingTeams, setIsLoadingTeams] = useState(false);
+
+	const [activeTab, setActiveTab] = useState('Driver');
 	useEffect(() => {
-		const fetchData = async () => {
-			setIsLoadingDrivers(true);
-			try {
-				const response = await fetch('http://f1_telemetry.test/allDrivers/999');
-				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`);
+		if(activeTab == 'Driver'){
+			const fetchData = async () => {
+				setIsLoadingDrivers(true);
+				try {
+					const response = await fetch('http://f1_telemetry.test/allDrivers/999');
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					let actualData = await response.json();
+					setDrivers(actualData['drivers']);
+				} catch (e) {
+					const error = e;
+				} finally {
+					setIsLoadingDrivers(false);
 				}
-				let actualData = await response.json();
-				setDrivers(actualData['drivers']);
-			} catch (e) {
-				const error = e;
-			} finally {
-				setIsLoadingDrivers(false);
-			}
-		};
-		fetchData();
-	}, []);
-
-	if (isLoadingDrivers) {
-		return <LoadingCard contentType="drivers" />
-	}
-
-	function clickTeamTab() {
-		const fetchData = async () => {
+			};
+			fetchData();
+		}else{
+			const fetchData = async () => {
 			setIsLoadingTeams(true);
 			try {
 				const response = await fetch('http://f1_telemetry.test/allTeams/999');
@@ -59,6 +56,15 @@ export default function Dashboard() {
 			}
 		};
 		fetchData();
+		}
+	}, [activeTab]);
+
+	if (isLoadingDrivers) {
+		return <LoadingCard contentType="drivers" />;
+	}
+
+	function clickTeamTab() {
+		setActiveTab('Team');
 	}
 
 
