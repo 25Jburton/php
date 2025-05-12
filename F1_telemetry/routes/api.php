@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
 	Route::get('/driversYear/{year}/{limit}', [DriverSessionController::class, 'showByYear'])
 	->name('driversYear');
 
+	Route::get('/getDriver/{query}', [DriverSessionController::class, 'showDriver'])
+	->name('showDriver');
+
 	Route::get('/allTeams/{limit}', [TeamSessionController::class, 'showAll'])
 	->name('allTeams');
 

@@ -23,6 +23,14 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('circuits', function () {
 		return Inertia::render('circuits');
 	})->name('circuits');
+
+	Route::get('drivers', function () {
+		return Inertia::render('drivers');
+	})->name('drivers');
+
+	Route::get('teams', function () {
+		return Inertia::render('teams');
+	})->name('teams');
 });
 
 require __DIR__.'/settings.php';

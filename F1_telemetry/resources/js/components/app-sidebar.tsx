@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, CarIcon, Folder, GridIcon, LayoutGrid, LogsIcon, MapIcon, TrophyIcon } from 'lucide-react';
+import { BookOpen, CarIcon, Folder, GridIcon, LayoutGrid, LogsIcon, MapIcon, PersonStandingIcon, ShipWheelIcon, TrophyIcon } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -28,6 +28,17 @@ const mainNavItems: NavItem[] = [
 		href: '/circuits',
 		icon: MapIcon,
 	},
+	{
+		title: 'Drivers',
+		href: '/drivers',
+		icon: PersonStandingIcon,
+	},
+	{
+		title: 'Teams',
+		href: '/teams',
+		icon: CarIcon,
+	},
+
 ];
 const footerNavItems: NavItem[] = [
 	{

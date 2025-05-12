@@ -3,11 +3,15 @@ import { type DriversItemType as DriversItemType } from '@/types';
 import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
 import { Badge } from './ui/badge';
 
-export function DriverIndividualCard({ driver }: { driver: DriversItemType[] }) {
+export function DriverIndividualCard({ driver, driverSearch }: { driver: DriversItemType[], driverSearch: DriversItemType[]  }) {
+
+    if(driverSearch.length > 0){
+		driver = driverSearch;
+	}
     return (
         <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-4">
             {driver.map((item) => (
-                <div className="border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
+                <div className="border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center" key={item['driverId']}>
                     <Drawer>
                         <DrawerTrigger className="p-4 rounded-xl hover:bg-red-500 hover:text-accent-foreground ">
                             <Badge>{item['nationality']}</Badge><br/>{item['name']} {item['surname']}

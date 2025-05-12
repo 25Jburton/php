@@ -42,4 +42,21 @@ class DriverSessionController extends RetrieveDrivers
 		return $response;
 	}
 
+	/**
+	 * Handle an incoming driver query request.
+	 */
+	public function showDriver(Request $request): Array
+	{   
+		$query = $request->route('query');
+
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'query' => $query,
+			'section' => 'drivers'
+		])->get('{+endpoint}/{section}/search?q={query}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
+		return $response;
+	}
+
 }
