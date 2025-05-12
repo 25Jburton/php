@@ -43,6 +43,9 @@ Route::middleware('auth')->group(function () {
 	Route::get('/teamsYear/{year}/{limit}', [TeamSessionController::class, 'showByYear'])
 	->name('teamsYear');
 
+	Route::get('/getTeam/{query}', [TeamSessionController::class, 'showTeam'])
+	->name('showTeam');
+
 	Route::get('/allCircuits/{limit}', [CircuitsSessionController::class, 'showAll'])
 	->name('allCircuits');
 

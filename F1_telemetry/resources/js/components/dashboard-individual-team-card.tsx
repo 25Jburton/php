@@ -3,7 +3,11 @@ import { type TeamsItemType as TeamsItemType } from '@/types';
 import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
 import { Badge } from './ui/badge';
 
-export function TeamIndividualCard({ teams }: { teams: TeamsItemType[] }) {
+export function TeamIndividualCard({ teams , teamSearch}: { teams: TeamsItemType[], teamSearch:TeamsItemType[]  }) {
+    
+    if(teamSearch.length > 0){
+		teams = teamSearch;
+	}
     return (
         <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-4">
             {teams.map((item) => (

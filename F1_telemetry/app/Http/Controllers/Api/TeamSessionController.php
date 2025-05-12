@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class TeamSessionController extends RetrieveDrivers
 {
 	/**
-	 * Handle initial load driver request.
+	 * Handle initial load team request.
 	 */
 	public function showAll(Request $request): Array
 	{
@@ -24,7 +24,7 @@ class TeamSessionController extends RetrieveDrivers
 	}
 
 	/**
-	 * Handle an incoming driver year request.
+	 * Handle an incoming team year request.
 	 */
 	public function showByYear(Request $request): Array
 	{   
@@ -37,6 +37,23 @@ class TeamSessionController extends RetrieveDrivers
 			'year' => $year,
 			'section' => 'teams'
 		])->get('{+endpoint}/{year}/{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
+		return $response;
+	}
+
+		/**
+	 * Handle an incoming team query request.
+	 */
+	public function showTeam(Request $request): Array
+	{   
+		$query = $request->route('query');
+
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'query' => $query,
+			'section' => 'teams'
+		])->get('{+endpoint}/{section}/search?q={query}');
 		$response = json_decode($response);
 		$response = json_decode(json_encode($response), true);
 		return $response;
