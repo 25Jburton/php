@@ -1,11 +1,15 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { Icon } from '@/components/ui/icon';
 import { CarIcon, InfoIcon, LogsIcon, MapIcon, PersonStandingIcon, TrophyIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import '../../css/dashboard.css';
+import raceCar from '../../assets/raceCar.png';
+import team from '../../assets/teamwork.png';
+import circuit from '../../assets/circuit.png';
+import flag from '../../assets/flags.png';
+import standings from '../../assets/standings.png';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -21,7 +25,6 @@ export default function Dashboard() {
 			<Head title="Dashboard" />
 			<div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
 				<div className="m-4 border-sidebar-border/70 dark:border-sidebar-border relative min-h-[10vh] flex-1 rounded-xl md:min-h-min auto-rows-min gap-4 parent-card grid lg:grid-cols-2">
-					
 					<Card className='parent-card'>
 						<a href='/drivers' className='text-center'>
 							<CardHeader className='parent-card-drivers'>
@@ -31,7 +34,16 @@ export default function Dashboard() {
 							</CardHeader>
 						</a>
 					</Card>
-
+					<a href='/drivers'>
+						<div className='animated-icon' title='View Drivers Page'>
+							<img src={raceCar}></img>
+						</div>
+					</a>
+					<a href='/teams' className='text-center' title='View Teams Page'>
+						<div className='animated-icon'>
+							<img src={team}></img>
+						</div>
+					</a>
 					<Card className='parent-card'>
 						<a href='/teams' className='text-center'>
 							<CardHeader className='parent-card-teams'>
@@ -51,7 +63,16 @@ export default function Dashboard() {
 							</CardHeader>
 						</a>
 					</Card>
-
+					<a href='/circuits' className='text-center' title='View Circuit Page'>
+						<div className='animated-icon'>
+							<img src={circuit}></img>
+						</div>
+					</a>
+					<a href='/standings' className='text-center' title='View Standings Page'>
+						<div className='animated-icon'>
+							<img src={standings}></img>
+						</div>
+					</a>
 					<Card className='parent-card'>
 						<a href='/standings'  className='text-center' title='View Standings Page'>
 							<CardHeader className='parent-card-standings'>
@@ -71,18 +92,22 @@ export default function Dashboard() {
 							</CardHeader>
 						</a>
 					</Card>
-
-					<Card className='p-4 parent-card'>
-						<CardHeader className='parent-card-api'>
-							<Icon iconNode={InfoIcon}></Icon>
-							<CardTitle className='text-center'>API Information </CardTitle>
-							<CardDescription className='text-center'>
-								This site pulls all returned data from the <a href='https://f1api.dev/'>f1api</a>. 
-								API provides access to data related to Formula 1 races, drivers, teams, circuits & more.
-							</CardDescription>
-						</CardHeader>
-					</Card>
+					<a href='/results'  className='text-center' title='View Results Page'>
+						<div className='animated-icon'>
+							<img src={flag}></img>
+						</div>
+					</a>
 				</div>
+				<Card className='p-4 parent-card'>
+					<CardHeader>
+						<Icon iconNode={InfoIcon}></Icon>
+						<CardTitle className='text-center'>API Information </CardTitle>
+						<CardDescription className='text-center'>
+							This site pulls all returned data from the <a href='https://f1api.dev/'>f1api</a>. 
+							API provides access to data related to Formula 1 races, drivers, teams, circuits & more.
+						</CardDescription>
+					</CardHeader>
+				</Card>
 			</div>
 		</AppLayout>
 	);

@@ -25,3 +25,26 @@
 	from { opacity: 1; }
 	to { opacity: 0.5; }
 }
+
+
+.animated-icon{
+	display: flex;
+    justify-content: center;
+	height: 150px;
+}
+
+.animated-icon:hover{
+  animation-name: spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--animation-duration, 2s);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
