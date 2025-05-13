@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+.parent-card  {
+  	opacity: 1;
+	padding: 2rem;
+}
+
+.parent-card-drivers, .parent-card-teams, .parent-card-circuits, .parent-card-standings, .parent-card-results, .parent-card-api {
+ 	animation: fadeOut 2s;
+	opacity: 0.5;
+}
+.parent-card-drivers:hover, .parent-card-teams:hover, .parent-card-circuits:hover, .parent-card-standings:hover, .parent-card-results:hover, .parent-card-api:hover {
+	animation: fadeIn 1s;
+	opacity: 1;
+	color: greenyellow;
+	transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+	from { opacity: 0.5; }
+	to { opacity: 2; }
+}
+
+@keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0.5; }
+}
