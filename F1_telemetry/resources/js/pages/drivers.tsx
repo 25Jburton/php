@@ -8,10 +8,13 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
 import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
 import { Button } from '@/components/ui/button';
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CardContent } from "@/components/ui/card";
 import { DriverIndividualCard } from "@/components/dashboard-individual-driver-card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";
+import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -75,7 +78,7 @@ export default function Drivers() {
         fetchData();
     }, [count, driverValue]);
     if (isLoading) {
-        return <LoadingCard contentType="circuits" />
+        return <LoadingCard contentType="drivers" />
     }
 
     const totalCount = ['10','25','50','100','500'];
@@ -87,6 +90,24 @@ export default function Drivers() {
         setDriverValue("");
         setDriverSearch([]);
     };
+
+    const chartData = [
+		{ nationality: "British", Total: 24 },
+		{ nationality: "Italian", Total: 32 },
+		{ nationality: "Name", Total: 5 },
+		{ nationality: "Name", Total: 3 },
+		{ nationality: "Name", Total: 2 },
+		{ nationality: "Name", Total: 14 },
+		{ nationality: "Name", Total: 16 },
+		{ nationality: "Name", Total: 5 },
+		{ nationality: "Name", Total: 7 },
+	];
+	const chartConfig = {
+		nationality: {
+			label: "Nationality",
+			color: "hsl(var(--chart-1))",
+		},
+	} satisfies ChartConfig;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -150,6 +171,51 @@ export default function Drivers() {
                                 ))}
                                 </SelectContent>
                             </Select>
+
+                            <Sheet>
+								<SheetTrigger>
+									<Button className="w-[150%] overflow-hidden p-4" variant="secondary">View Drivers Breakdown</Button>
+								</SheetTrigger>
+								<SheetContent>
+									<ScrollArea className="h-[100vh] rounded-md">
+										<SheetHeader>
+										<SheetTitle>Breakdown of Combined Driver Data</SheetTitle>
+										<SheetDescription>
+											<Card className="p-4">
+												<CardHeader>
+													<CardTitle>Nationality</CardTitle>
+													<CardDescription>Nationality breakdown for all drivers</CardDescription>
+												</CardHeader>
+												<CardContent>
+													<ChartContainer config={chartConfig}>
+														<BarChart accessibilityLayer data={chartData}>
+															<CartesianGrid vertical={false} />
+																<XAxis
+																dataKey="nationality"
+																tickLine={false}
+																tickMargin={10}
+																axisLine={false}
+																tickFormatter={(value) => value.slice(0, 3)}
+																/>
+																<ChartTooltip
+																cursor={false}
+																content={<ChartTooltipContent hideLabel />}
+																/>
+															<Bar dataKey="Total" fill="var(--chart-2)" radius={8} />
+														</BarChart>
+													</ChartContainer>
+												</CardContent>
+												<CardFooter className="flex-col items-start gap-2 text-sm">
+													<div className="leading-none text-muted-foreground">
+														Showing breakdown of all drivers based on their nationality
+													</div>
+												</CardFooter>
+											</Card>
+										</SheetDescription>
+										</SheetHeader>
+									</ScrollArea>
+								</SheetContent>
+							</Sheet>
                         </div>
                         <div className="space-y-1 text-end">
                             <Button className="w-[50%] overflow-hidden" variant="destructive" onClick={handleReset}>Reset Search</Button>
