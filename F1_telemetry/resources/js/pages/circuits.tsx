@@ -15,7 +15,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";
 import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
-import { Corner } from "@radix-ui/react-scroll-area";
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
