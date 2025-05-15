@@ -47,7 +47,7 @@ export default function NationalityGraph(){
                 <CardDescription>Nationality breakdown for all drivers</CardDescription>
             </CardHeader>
             <CardContent className="h-[100%]">
-                <ChartContainer config={chartConfig} className="h-[100vh]">
+                <ChartContainer config={chartConfig} className="h-[100vh] w-[45%]">
                     <BarChart accessibilityLayer
                         data={chartData}
                         layout="vertical"
