@@ -41,13 +41,13 @@ export default function NationalityGraph(){
 	} satisfies ChartConfig;
 
     return (
-        <Card className="p-4">
+        <Card className="p-4 h-[100%]">
             <CardHeader>
                 <CardTitle>Nationality</CardTitle>
                 <CardDescription>Nationality breakdown for all drivers</CardDescription>
             </CardHeader>
-            <CardContent>
-                <ChartContainer config={chartConfig}>
+            <CardContent className="h-[100%]">
+                <ChartContainer config={chartConfig} className="h-[100vh]">
                     <BarChart accessibilityLayer
                         data={chartData}
                         layout="vertical"
