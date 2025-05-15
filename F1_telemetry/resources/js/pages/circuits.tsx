@@ -3,8 +3,8 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import { LoadingCard } from '@/components/loading-card';
-import { CircuitIndividualCard } from '@/components/circuit-individual-card';
+import { LoadingCard } from '@/components/loading/loading-card';
+import { CircuitIndividualCard } from '@/components/circuits/circuit-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
 import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"

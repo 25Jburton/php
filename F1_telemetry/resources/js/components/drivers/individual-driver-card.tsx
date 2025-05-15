@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { type DriversItemType as DriversItemType } from '@/types';
 import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
-import { Badge } from './ui/badge';
+import { Badge } from '../ui/badge';
 
 export function DriverIndividualCard({ driver, driverSearch }: { driver: DriversItemType[], driverSearch: DriversItemType[]  }) {
 

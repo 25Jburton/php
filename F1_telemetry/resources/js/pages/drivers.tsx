@@ -3,18 +3,19 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import { LoadingCard } from '@/components/loading-card';
+import { LoadingCard } from '@/components/loading/loading-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
-import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
+import { Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
+import { Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
 import { Button } from '@/components/ui/button';
-import { Check, ChevronsUpDown, TrendingUp } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DriverIndividualCard } from "@/components/dashboard-individual-driver-card";
+import { DriverIndividualCard } from "@/components/drivers/individual-driver-card";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";
 import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
+import NationalityGraph from '@/components/graphs/drivers-nationality-graph';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -174,14 +175,15 @@ export default function Drivers() {
 
                             <Sheet>
 								<SheetTrigger>
-									<Button className="w-[150%] overflow-hidden p-4" variant="secondary">View Drivers Breakdown</Button>
+									<a className="w-[150%] overflow-hidden p-4" >View Drivers Breakdown</a>
 								</SheetTrigger>
 								<SheetContent>
 									<ScrollArea className="h-[100vh] rounded-md">
 										<SheetHeader>
 										<SheetTitle>Breakdown of Combined Driver Data</SheetTitle>
-										<SheetDescription>
-											<Card className="p-4">
+										{/* <SheetDescription> */}
+
+											{/* <Card className="p-4">
 												<CardHeader>
 													<CardTitle>Nationality</CardTitle>
 													<CardDescription>Nationality breakdown for all drivers</CardDescription>
@@ -210,8 +212,10 @@ export default function Drivers() {
 														Showing breakdown of all drivers based on their nationality
 													</div>
 												</CardFooter>
-											</Card>
-										</SheetDescription>
+											</Card> */}
+                                            <NationalityGraph />
+
+										{/* </SheetDescription> */}
 										</SheetHeader>
 									</ScrollArea>
 								</SheetContent>

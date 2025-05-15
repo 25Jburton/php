@@ -3,14 +3,14 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import { LoadingCard } from '@/components/loading-card';
+import { LoadingCard } from '@/components/loading/loading-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
 import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
 import { Button } from '@/components/ui/button';
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { TeamIndividualCard } from "@/components/dashboard-individual-team-card";
+import { TeamIndividualCard } from "@/components/teams/team-individual-card";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";

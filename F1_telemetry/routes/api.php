@@ -27,47 +27,52 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-	// Testing dump to setup function calls
-	Route::get('/allDrivers/{limit}', [DriverSessionController::class, 'showAll'])
-	->name('allDrivers');
+	// Drivers Data
+		Route::get('/allDrivers/{limit}', [DriverSessionController::class, 'showAll'])
+		->name('allDrivers');
 
-	Route::get('/driversYear/{year}/{limit}', [DriverSessionController::class, 'showByYear'])
-	->name('driversYear');
+		Route::get('/driversYear/{year}/{limit}', [DriverSessionController::class, 'showByYear'])
+		->name('driversYear');
 
-	Route::get('/getDriver/{query}', [DriverSessionController::class, 'showDriver'])
-	->name('showDriver');
+		Route::get('/getDriver/{query}', [DriverSessionController::class, 'showDriver'])
+		->name('showDriver');
 
-	Route::get('/allTeams/{limit}', [TeamSessionController::class, 'showAll'])
-	->name('allTeams');
+		Route::get('/getDriversNationalities', [DriverSessionController::class, 'getDriversNationalities'])
+		->name('getDriversNationalities');
 
-	Route::get('/teamsYear/{year}/{limit}', [TeamSessionController::class, 'showByYear'])
-	->name('teamsYear');
+	// Teams Data
+		Route::get('/allTeams/{limit}', [TeamSessionController::class, 'showAll'])
+		->name('allTeams');
 
-	Route::get('/getTeam/{query}', [TeamSessionController::class, 'showTeam'])
-	->name('showTeam');
+		Route::get('/teamsYear/{year}/{limit}', [TeamSessionController::class, 'showByYear'])
+		->name('teamsYear');
 
-	Route::get('/allCircuits/{limit}', [CircuitsSessionController::class, 'showAll'])
-	->name('allCircuits');
+		Route::get('/getTeam/{query}', [TeamSessionController::class, 'showTeam'])
+		->name('showTeam');
+	// Circuits Data
+		Route::get('/allCircuits/{limit}', [CircuitsSessionController::class, 'showAll'])
+		->name('allCircuits');
 
-	Route::get('/getCircuit/{query}', [CircuitsSessionController::class, 'showCircuit'])
-	->name('getCircuit');
+		Route::get('/getCircuit/{query}', [CircuitsSessionController::class, 'showCircuit'])
+		->name('getCircuit');
 
-	Route::get('/standingsDrivers/{year}/{limit}', [StandingsSessionController::class, 'showAllDrivers'])
-	->name('standingsDrivers');
+	// Standings Data
+		Route::get('/standingsDrivers/{year}/{limit}', [StandingsSessionController::class, 'showAllDrivers'])
+		->name('standingsDrivers');
 
-	Route::get('/standingsConstructors/{year}/{limit}', [StandingsSessionController::class, 'showAllConstructors'])
-	->name('standingsConstructors');
+		Route::get('/standingsConstructors/{year}/{limit}', [StandingsSessionController::class, 'showAllConstructors'])
+		->name('standingsConstructors');
 
-	// Get the valid round number and circuits 
-	Route::get('/ResultsSession/{year}/', [ResultsSessionController::class, 'showAllRoundsWithCircuits'])
-	->name('resultsAllCircuits');
-	
-	Route::get('/ResultsSession/{year}/{circuit}', [ResultsSessionController::class, 'showAllSessionsForCircuit'])
-	->name('resultsAllSessions');
+	// Results Data
+		Route::get('/ResultsSession/{year}/', [ResultsSessionController::class, 'showAllRoundsWithCircuits'])
+		->name('resultsAllCircuits');
+		
+		Route::get('/ResultsSession/{year}/{circuit}', [ResultsSessionController::class, 'showAllSessionsForCircuit'])
+		->name('resultsAllSessions');
 
-	Route::get('/ResultsSession/all/{year}/{circuit}', [ResultsSessionController::class, 'showAllSessions'])
-	->name('resultsAllSessionsForCircuit');
+		Route::get('/ResultsSession/all/{year}/{circuit}', [ResultsSessionController::class, 'showAllSessions'])
+		->name('resultsAllSessionsForCircuit');
 
-	Route::get('/ResultsSession/{year}/{circuit}/{session}', [ResultsSessionController::class, 'showSessions'])
-	->name('resultsSession');
+		Route::get('/ResultsSession/{year}/{circuit}/{session}', [ResultsSessionController::class, 'showSessions'])
+		->name('resultsSession');
 });

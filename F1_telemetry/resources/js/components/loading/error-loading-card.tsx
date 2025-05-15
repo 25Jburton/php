@@ -2,8 +2,8 @@ import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head } from "@inertiajs/react";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Card } from "./ui/card";
-import { LoadingBlock } from "./loading-skeleton-block";
+import { Card } from "../ui/card";
+import { LoadingBlock } from "../loading/loading-skeleton-block";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

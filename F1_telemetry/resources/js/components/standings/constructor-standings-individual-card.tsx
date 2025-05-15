@@ -1,11 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { type ConstructorsStandingItemType } from '@/types';
-import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
-import {Dialog,DialogContent,DialogDescription,DialogFooter,DialogHeader,DialogTitle,DialogTrigger} from "@/components/ui/dialog"
+import { Dialog,DialogContent,DialogDescription,DialogHeader,DialogTitle,DialogTrigger} from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
-import { Icon } from './icon';
-import {CrownIcon, Trophy } from 'lucide-react';
-import { Badge } from './ui/badge';
+import { Icon } from '../universal/icon';
+import { CrownIcon, Trophy } from 'lucide-react';
+import { Badge } from '../ui/badge';
 export function ConstructorStandingsIndividualCard({ standings, year }: { standings: ConstructorsStandingItemType[], year: string }) {
 	return (
 		<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">

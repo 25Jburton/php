@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class DriverSessionController extends RetrieveDrivers
 {
 	/**
-	 * Handle initial load driver request.
+	 * Return all drivers
 	 */
 	public function showAll(Request $request): Array
 	{   
@@ -24,7 +24,7 @@ class DriverSessionController extends RetrieveDrivers
 	}
 
 	/**
-	 * Handle an incoming driver year request.
+	 * Return all drivers from a given year
 	 */
 	public function showByYear(Request $request): Array
 	{   
@@ -43,7 +43,7 @@ class DriverSessionController extends RetrieveDrivers
 	}
 
 	/**
-	 * Handle an incoming driver query request.
+	 * Return all drivers matching query
 	 */
 	public function showDriver(Request $request): Array
 	{   
@@ -57,6 +57,31 @@ class DriverSessionController extends RetrieveDrivers
 		$response = json_decode($response);
 		$response = json_decode(json_encode($response), true);
 		return $response;
+	}
+
+	/**
+	 * Return a breakdown of all drivers nationalities
+	 */
+	public function getDriversNationalities(): Array
+	{   
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => 1000,
+			'section' => 'drivers'
+		])->get('{+endpoint}/{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
+		$nationalityArray = [];
+		$allNationalitiesArray = [];
+		foreach($response['drivers'] as $driver){
+			$nationalityArray[$driver['nationality']] = 0;
+			array_push($allNationalitiesArray, $driver['nationality']);
+		}
+		foreach($allNationalitiesArray as $nationality){
+			$nationalityArray[$nationality] += 1;
+		}
+
+		return $nationalityArray;
 	}
 
 }
