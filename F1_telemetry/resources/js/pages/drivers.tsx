@@ -181,41 +181,9 @@ export default function Drivers() {
 									<ScrollArea className="h-[100vh] rounded-md">
 										<SheetHeader>
 										<SheetTitle>Breakdown of Combined Driver Data</SheetTitle>
-										{/* <SheetDescription> */}
-
-											{/* <Card className="p-4">
-												<CardHeader>
-													<CardTitle>Nationality</CardTitle>
-													<CardDescription>Nationality breakdown for all drivers</CardDescription>
-												</CardHeader>
-												<CardContent>
-													<ChartContainer config={chartConfig}>
-														<BarChart accessibilityLayer data={chartData}>
-															<CartesianGrid vertical={false} />
-																<XAxis
-																dataKey="nationality"
-																tickLine={false}
-																tickMargin={10}
-																axisLine={false}
-																tickFormatter={(value) => value.slice(0, 3)}
-																/>
-																<ChartTooltip
-																cursor={false}
-																content={<ChartTooltipContent hideLabel />}
-																/>
-															<Bar dataKey="Total" fill="var(--chart-2)" radius={8} />
-														</BarChart>
-													</ChartContainer>
-												</CardContent>
-												<CardFooter className="flex-col items-start gap-2 text-sm">
-													<div className="leading-none text-muted-foreground">
-														Showing breakdown of all drivers based on their nationality
-													</div>
-												</CardFooter>
-											</Card> */}
+										
                                             <NationalityGraph />
 
-										{/* </SheetDescription> */}
 										</SheetHeader>
 									</ScrollArea>
 								</SheetContent>

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { useEffect, useState } from "react";
-import { CartesianGrid, XAxis, Bar, BarChart } from "recharts";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
 
 export default function NationalityGraph(){
     const [nationalityData, setNationalityData] = useState([]);
@@ -35,6 +35,9 @@ export default function NationalityGraph(){
 			label: "Nationality",
 			color: "hsl(var(--chart-1))",
 		},
+        label: {
+            color: "hsl(var(--background))",
+        },
 	} satisfies ChartConfig;
 
     return (
@@ -45,20 +48,49 @@ export default function NationalityGraph(){
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
-                    <BarChart accessibilityLayer data={chartData}>
-                        <CartesianGrid vertical={false} />
-                            <XAxis
+                    <BarChart accessibilityLayer
+                        data={chartData}
+                        layout="vertical"
+                        margin={{
+                            right: 16,
+                        }}
+                    >
+                        <CartesianGrid horizontal={false} />
+                        <YAxis
                             dataKey="Nationality"
+                            type="category"
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
                             tickFormatter={(value) => value.slice(0, 3)}
+                            height={10}
+                            hide
+                        />
+                        <XAxis
+                            dataKey="Total" type="number" height={10} hide
+                        />
+                        <ChartTooltip
+                        cursor={false}
+                        content={<ChartTooltipContent hideLabel />}
+                        />
+                        <Bar dataKey="Total" fill="var(--chart-2)" layout="vertical" radius={2} minPointSize={5} >
+                            <LabelList
+                                dataKey="Nationality"
+                                position="right"
+                                offset={20}
+                                className="fill-foreground"
+                                fontSize={12}
+                                height={10}
                             />
-                            <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent hideLabel />}
+                            <LabelList
+                                dataKey="Total"
+                                position="center"
+                                offset={20}
+                                className="fill-foreground"
+                                fontSize={12}
+                                height={10}
                             />
-                        <Bar dataKey="Total" fill="var(--chart-2)" radius={8} />
+                        </Bar>
                     </BarChart>
                 </ChartContainer>
             </CardContent>
