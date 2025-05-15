@@ -33,7 +33,7 @@ export default function Drivers() {
     const [isLoading, setIsLoading] = useState(false);
     const [driverSearch, setDriverSearch] = useState([]);
 	const [driverValue, setDriverValue] = useState("");
-    const [count, setCount] = useState('1000');
+    const [count, setCount] = useState('50');
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -50,7 +50,7 @@ export default function Drivers() {
                     console.log('http://f1_telemetry.test/getDriver/'+encodeURIComponent(driverValue));
 
 
-					const responseAll = await fetch('http://f1_telemetry.test/allDrivers/'+count);
+					const responseAll = await fetch('http://f1_telemetry.test/allDrivers/'+1000);
 					if (!responseAll.ok) {
 						throw new Error(`HTTP error! status: ${responseAll.status}`);
 					}
@@ -63,12 +63,20 @@ export default function Drivers() {
                 }
             }else{
                 try {
-                  const response = await fetch('http://f1_telemetry.test/allDrivers/'+count);
+                    const response = await fetch('http://f1_telemetry.test/allDrivers/'+count);
 					if (!response.ok) {
 						throw new Error(`HTTP error! status: ${response.status}`);
 					}
-					let actualData = await response.json();
-					setDrivers(actualData['drivers']);
+					let searchData = await response.json();
+
+                    setDriverSearch(searchData['drivers']);
+
+                  const responseAll = await fetch('http://f1_telemetry.test/allDrivers/'+1000);
+					if (!responseAll.ok) {
+						throw new Error(`HTTP error! status: ${responseAll.status}`);
+					}
+					let actualDataAll = await responseAll.json();
+					setDrivers(actualDataAll['drivers']);
                 } catch (e) {
                     const error = e;
                 } finally {
@@ -134,7 +142,7 @@ export default function Drivers() {
                                     <Command>
                                     <CommandInput placeholder="Search drivers..." />
                                     <CommandList>
-                                        <CommandEmpty>No circuits found.</CommandEmpty>
+                                        <CommandEmpty>No drivers found.</CommandEmpty>
                                         <CommandGroup>
                                         {driver.map((item) => (
                                             <CommandItem
