@@ -6,10 +6,10 @@ import {Carousel,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious} fro
 export function CircuitIndividualCard({ circuit, circuitSearch }: { circuit: CircuitsItemType[], circuitSearch: CircuitsItemType[] }) {
 
 	function getKmLength(length:string){
-		return parseInt(length) / 100;
+		return parseInt(length) / 1000;
 	}
 	function getMileLength(length:string){
-		let lengthKm = parseInt(length) / 100;
+		let lengthKm = parseInt(length) / 1000;
 		return (lengthKm / 1.60934).toFixed(2);
 	}
 

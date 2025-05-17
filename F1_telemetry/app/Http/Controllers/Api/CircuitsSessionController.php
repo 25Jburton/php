@@ -104,7 +104,7 @@ class CircuitsSessionController extends RetrieveDrivers
 		$length = [];
 		foreach($response['circuits'] as $circuit){
 			if($circuit['numberOfCorners'] > 0){
-				array_key_exists($circuit['circuitName'], $length) ? $length[$circuit['circuitName']] = $circuit['circuitLength'] : $length[$circuit['circuitName']] = $circuit['circuitLength'];
+				array_key_exists($circuit['circuitName'], $length) ? $length[$circuit['circuitName']] = $circuit['circuitLength']/ 1000 : $length[$circuit['circuitName']] = ($circuit['circuitLength']/ 1000);
 			}
 		}
 		asort($length);
@@ -127,7 +127,7 @@ class CircuitsSessionController extends RetrieveDrivers
 		$avg = [];
 		foreach($response['circuits'] as $circuit){
 			if($circuit['circuitLength'] > 0){
-				array_push($avg, $circuit['circuitLength']);	
+				array_push($avg, $circuit['circuitLength'] / 1000);	
 			}
 		}
 	
