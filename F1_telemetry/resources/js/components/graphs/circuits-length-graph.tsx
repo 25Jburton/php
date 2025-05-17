@@ -47,7 +47,7 @@ export default function LengthGraph(){
 		<Card className="mt-4 p-4 h-[50%] w-[100%]">
 			<CardHeader>
 				<CardTitle>Distance of Tracks</CardTitle>
-				<CardDescription>Track distance by kilometers</CardDescription>
+				<CardDescription>Track distance by miles</CardDescription>
 			</CardHeader>
 			<CardContent className="h-[50%]">
 				<ChartContainer config={chartConfig} className="h-[33vh] w-[100%]">
@@ -106,10 +106,10 @@ export default function LengthGraph(){
 			</CardContent>
 			<CardFooter className="flex-col items-start gap-2 text-sm">
 				<div className="flex gap-2 font-medium leading-none">
-					Average circuit length {avg} kilometers
+					Average circuit length {avg} miles
 				</div>
 				<div className="leading-none text-muted-foreground">
-					Showing total distance for all circuits in kilometers
+					Showing total distance for all circuits in miles
 				</div>
 			</CardFooter>
 		</Card>
