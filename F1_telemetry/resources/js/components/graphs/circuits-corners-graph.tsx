@@ -43,13 +43,13 @@ export default function CornersGraph(){
 	} satisfies ChartConfig;
 
 	return (
-	<Card className="p-4 h-[50%] w-[85%]">
+	<Card className="mt-4 p-4 h-[50%] w-[100%]">
 		<CardHeader>
 			<CardTitle>Corners</CardTitle>
 			<CardDescription>Average Number of Corners on Track</CardDescription>
 		</CardHeader>
 		<CardContent className="h-[50%]">
-			<ChartContainer config={chartConfig} className="h-[50vh] w-[100%]">
+			<ChartContainer config={chartConfig} className="h-[33vh] w-[100%]">
 				<BarChart accessibilityLayer data={chartData}>
 					<CartesianGrid vertical={false} />
 						<XAxis

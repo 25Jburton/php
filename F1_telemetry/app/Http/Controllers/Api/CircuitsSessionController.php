@@ -86,4 +86,53 @@ class CircuitsSessionController extends RetrieveDrivers
 		
 		return $average;
 	}
+
+
+	/**
+	 * Return breakdown of track lengths
+	 */
+	public function getCircuitsLength(): Array
+	{
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => 1000,
+			'section' => 'circuits'
+		])->get('{+endpoint}{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
+
+		$length = [];
+		foreach($response['circuits'] as $circuit){
+			if($circuit['numberOfCorners'] > 0){
+				array_key_exists($circuit['circuitName'], $length) ? $length[$circuit['circuitName']] = $circuit['circuitLength'] : $length[$circuit['circuitName']] = $circuit['circuitLength'];
+			}
+		}
+		asort($length);
+		return $length;
+	}
+
+	/**
+	 * Return breakdown of track avg corners count
+	 */
+	public function getAvgCircuitsLength(): float
+	{
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => 1000,
+			'section' => 'circuits'
+		])->get('{+endpoint}{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
+
+		$avg = [];
+		foreach($response['circuits'] as $circuit){
+			if($circuit['circuitLength'] > 0){
+				array_push($avg, $circuit['circuitLength']);	
+			}
+		}
+	
+		$average = array_sum($avg)/count($avg);
+		
+		return $average;
+	}
 }

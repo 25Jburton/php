@@ -16,6 +16,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";
 import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
 import CornersGraph from "@/components/graphs/circuits-corners-graph";
+import LengthGraph from "@/components/graphs/circuits-length-graph";
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -91,43 +92,6 @@ export default function Circuits() {
 		setCircuitSearch([]);
 	};
 
-	const chartDataLength = [
-		{ track: "track1", distance: 275, fill: "var(--chart-1)" },
-		{ track: "track2", distance: 200, fill: "var(--chart-1)" },
-		{ track: "track3", distance: 187, fill: "var(--chart-1)" },
-		{ track: "track4", distance: 173, fill: "var(--chart-1)" },
-		{ track: "track5", distance: 90, fill: "var(--chart-1)" },
-		{ track: "track6", distance: 90, fill: "var(--chart-1)" },
-	];
-	const chartConfigLength = {
-		 track1: {
-			label: "track name",
-			color: "hsl(var(--chart-2))",
-		},
-		track2: {
-			label: "track name",
-			color: "hsl(var(--chart-1))",
-		},
-		track3: {
-			label: "track name",
-			color: "hsl(var(--chart-2))",
-		},
-		track4: {
-			label: "track name",
-			color: "hsl(var(--chart-3))",
-		},
-		track5: {
-			label: "track name",
-			color: "hsl(var(--chart-4))",
-		},
-		track6: {
-			label: "track name",
-			color: "hsl(var(--chart-5))",
-		},
-	} satisfies ChartConfig;
-
-
-
 	return (
 		<AppLayout breadcrumbs={breadcrumbs}>
 			<Head title="Circuits" />
@@ -202,68 +166,7 @@ export default function Circuits() {
 										<SheetDescription>
 											<CornersGraph />
 
-											<Card>
-												<CardHeader>
-													<CardTitle>Distance of Tracks</CardTitle>
-													<CardDescription>Track distance by miles</CardDescription>
-												</CardHeader>
-												<CardContent>
-													<ChartContainer config={chartConfigLength}>
-													<LineChart
-														accessibilityLayer
-														data={chartDataLength}
-														margin={{
-															top: 24,
-															left: 24,
-															right: 24,
-														}}
-													>
-														<CartesianGrid vertical={false} />
-														<ChartTooltip
-															cursor={false}
-															content={
-																<ChartTooltipContent
-																indicator="line"
-																nameKey="distance"
-																hideLabel
-																/>
-															}
-														/>
-														<Line
-															dataKey="distance"
-															type="natural"
-															stroke="var(--chart-2)"
-															strokeWidth={2}
-															dot={{
-																fill: "var(--chart-2)",
-															}}
-															activeDot={{
-																r: 6,
-															}}
-														>
-															<LabelList
-																position="top"
-																offset={12}
-																className="fill-foreground"
-																fontSize={12}
-																dataKey="track"
-																formatter={(value: keyof typeof chartConfigLength) =>
-																chartConfigLength[value]?.label
-																}
-															/>
-														</Line>
-													</LineChart>
-													</ChartContainer>
-												</CardContent>
-												<CardFooter className="flex-col items-start gap-2 text-sm">
-													<div className="flex gap-2 font-medium leading-none">
-													Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-													</div>
-													<div className="leading-none text-muted-foreground">
-													Showing total distance for the last 6 months
-													</div>
-												</CardFooter>
-											</Card>
+											<LengthGraph />
 										</SheetDescription>
 										</SheetHeader>
 									</ScrollArea>

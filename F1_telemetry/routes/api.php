@@ -60,6 +60,14 @@ Route::middleware('auth')->group(function () {
 
 		Route::get('/getAvgCircuitsCorners', [CircuitsSessionController::class, 'getAvgCircuitsCorners'])
 		->name('getAvgCircuitsCorners');
+
+		Route::get('/getCircuitsLength', [CircuitsSessionController::class, 'getCircuitsLength'])
+		->name('getCircuitsLength');
+
+		Route::get('/getAvgCircuitsLength', [CircuitsSessionController::class, 'getAvgCircuitsLength'])
+		->name('getAvgCircuitsLength');
+
+
 	// Standings Data
 		Route::get('/standingsDrivers/{year}/{limit}', [StandingsSessionController::class, 'showAllDrivers'])
 		->name('standingsDrivers');
