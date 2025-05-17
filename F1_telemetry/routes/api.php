@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function () {
 
 		Route::get('/getDriversNationalities', [DriverSessionController::class, 'getDriversNationalities'])
 		->name('getDriversNationalities');
-
 	// Teams Data
 		Route::get('/allTeams/{limit}', [TeamSessionController::class, 'showAll'])
 		->name('allTeams');
@@ -56,6 +55,11 @@ Route::middleware('auth')->group(function () {
 		Route::get('/getCircuit/{query}', [CircuitsSessionController::class, 'showCircuit'])
 		->name('getCircuit');
 
+		Route::get('/getCircuitsCorners', [CircuitsSessionController::class, 'getCircuitsCorners'])
+		->name('getCircuitsCorners');
+
+		Route::get('/getAvgCircuitsCorners', [CircuitsSessionController::class, 'getAvgCircuitsCorners'])
+		->name('getAvgCircuitsCorners');
 	// Standings Data
 		Route::get('/standingsDrivers/{year}/{limit}', [StandingsSessionController::class, 'showAllDrivers'])
 		->name('standingsDrivers');

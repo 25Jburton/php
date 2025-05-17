@@ -15,6 +15,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";
 import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
+import CornersGraph from "@/components/graphs/circuits-corners-graph";
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -89,37 +90,6 @@ export default function Circuits() {
 		setCircuitValue("");
 		setCircuitSearch([]);
 	};
-
-	const chartDataCorners = [
-		{ corner: "10", tracks: 186 },
-		{ corner: "11", tracks: 305 },
-		{ corner: "12", tracks: 237 },
-		{ corner: "13", tracks: 73 },
-		{ corner: "14", tracks: 209 },
-		{ corner: "15", tracks: 214 },
-		{ corner: "16", tracks: 186 },
-		{ corner: "17", tracks: 305 },
-		{ corner: "18", tracks: 237 },
-		{ corner: "19", tracks: 73 },
-		{ corner: "20", tracks: 209 },
-		{ corner: "21", tracks: 214 },
-		{ corner: "22", tracks: 186 },
-		{ corner: "23", tracks: 305 },
-		{ corner: "24", tracks: 237 },
-		{ corner: "25", tracks: 73 },
-		{ corner: "26", tracks: 209 },
-		{ corner: "27", tracks: 214 },
-	];
-	const chartConfigCorners = {
-		tracks: {
-			label: "Tracks",
-			color: "hsl(var(--chart-1))",
-		},
-		mobile: {
-			label: "Mobile",
-			color: "hsl(var(--chart-2))",
-		},
-	} satisfies ChartConfig;
 
 	const chartDataLength = [
 		{ track: "track1", distance: 275, fill: "var(--chart-1)" },
@@ -222,47 +192,15 @@ export default function Circuits() {
 							</Select>
 
 							<Sheet>
-								<SheetTrigger>
-									<Button className="w-[150%] overflow-hidden p-4" variant="secondary">View Circuits Stats</Button>
+								<SheetTrigger className="w-[150%] overflow-hidden p-4" variant="secondary">
+									View Circuits Stats
 								</SheetTrigger>
 								<SheetContent>
 									<ScrollArea className="h-[100vh] rounded-md">
 										<SheetHeader>
 										<SheetTitle>Breakdown of Combined Circuits Data</SheetTitle>
 										<SheetDescription>
-											<Card className="p-4">
-												<CardHeader>
-													<CardTitle>Corners</CardTitle>
-													<CardDescription>Average Number of Corners on Track</CardDescription>
-												</CardHeader>
-												<CardContent>
-													<ChartContainer config={chartConfigCorners}>
-														<BarChart accessibilityLayer data={chartDataCorners}>
-															<CartesianGrid vertical={false} />
-																<XAxis
-																dataKey="corner"
-																tickLine={false}
-																tickMargin={10}
-																axisLine={false}
-																tickFormatter={(value) => value.slice(0, 3)}
-																/>
-																<ChartTooltip
-																cursor={false}
-																content={<ChartTooltipContent hideLabel />}
-																/>
-															<Bar dataKey="tracks" fill="var(--chart-2)" radius={8} />
-														</BarChart>
-													</ChartContainer>
-												</CardContent>
-												<CardFooter className="flex-col items-start gap-2 text-sm">
-													<div className="flex gap-2 font-medium leading-none">
-														Average ___ <TrendingUp className="h-4 w-4" />
-													</div>
-													<div className="leading-none text-muted-foreground">
-														Showing total corners on each track
-													</div>
-												</CardFooter>
-											</Card>
+											<CornersGraph />
 
 											<Card>
 												<CardHeader>

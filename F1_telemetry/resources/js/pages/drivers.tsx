@@ -11,9 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DriverIndividualCard } from "@/components/drivers/individual-driver-card";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";
+import { CardContent } from "@/components/ui/card";
 import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
 import NationalityGraph from '@/components/graphs/drivers-nationality-graph';
 
@@ -47,8 +45,6 @@ export default function Drivers() {
 					}
 					let searchData = await response.json();
 					setDriverSearch(searchData['drivers']);
-                    console.log('http://f1_telemetry.test/getDriver/'+encodeURIComponent(driverValue));
-
 
 					const responseAll = await fetch('http://f1_telemetry.test/allDrivers/'+1000);
 					if (!responseAll.ok) {
@@ -68,7 +64,6 @@ export default function Drivers() {
 						throw new Error(`HTTP error! status: ${response.status}`);
 					}
 					let searchData = await response.json();
-
                     setDriverSearch(searchData['drivers']);
 
                   const responseAll = await fetch('http://f1_telemetry.test/allDrivers/'+1000);
@@ -99,24 +94,6 @@ export default function Drivers() {
         setDriverValue("");
         setDriverSearch([]);
     };
-
-    const chartData = [
-		{ nationality: "British", Total: 24 },
-		{ nationality: "Italian", Total: 32 },
-		{ nationality: "Name", Total: 5 },
-		{ nationality: "Name", Total: 3 },
-		{ nationality: "Name", Total: 2 },
-		{ nationality: "Name", Total: 14 },
-		{ nationality: "Name", Total: 16 },
-		{ nationality: "Name", Total: 5 },
-		{ nationality: "Name", Total: 7 },
-	];
-	const chartConfig = {
-		nationality: {
-			label: "Nationality",
-			color: "hsl(var(--chart-1))",
-		},
-	} satisfies ChartConfig;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -182,16 +159,14 @@ export default function Drivers() {
                             </Select>
 
                             <Sheet>
-								<SheetTrigger>
+								<SheetTrigger variant="secondary">
 									<a className="w-[150%] overflow-hidden p-4" >View Drivers Breakdown</a>
 								</SheetTrigger>
 								<SheetContent>
 									<ScrollArea className="h-[100vh] rounded-md">
 										<SheetHeader>
 										<SheetTitle>Breakdown of Combined Driver Data</SheetTitle>
-										
                                             <NationalityGraph />
-
 										</SheetHeader>
 									</ScrollArea>
 								</SheetContent>
@@ -202,7 +177,6 @@ export default function Drivers() {
                         </div>
                     </div>
                 </CardContent>
-
                 <div className="grid auto-rows-min gap-4 md:grid-cols-1 rounded-xl border">
                     <ScrollArea className="h-[80vh] rounded-md">
                         <DriverIndividualCard driver={driver}  driverSearch={driverSearch}/>
