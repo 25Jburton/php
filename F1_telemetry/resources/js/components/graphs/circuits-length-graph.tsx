@@ -5,7 +5,7 @@ import { Bar, BarChart, CartesianGrid, LabelList, Line, LineChart, XAxis, YAxis 
 
 export default function LengthGraph(){	
 	const [data, setData] = useState([]);
-	const [avg, setAvg] = useState([]);
+	const [avg, setAvg] = useState(0);
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -14,12 +14,8 @@ export default function LengthGraph(){
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 				let actualData = await response.json();
-				setData(actualData);
-
-				const avgResponse = await fetch('http://f1_telemetry.test/getAvgCircuitsLength/');
-				let data = await avgResponse.json();
-				data = data.toFixed(2);
-				setAvg(data);
+				setData(actualData['circuits']);
+				setAvg(actualData['avg'].toFixed(2));
 			} catch (e) {
 				const error = e;
 			} 

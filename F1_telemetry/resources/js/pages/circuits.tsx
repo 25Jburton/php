@@ -163,11 +163,8 @@ export default function Circuits() {
 									<ScrollArea className="h-[100vh] rounded-md">
 										<SheetHeader>
 										<SheetTitle>Breakdown of Combined Circuits Data</SheetTitle>
-										<SheetDescription>
 											<CornersGraph />
-
 											<LengthGraph />
-										</SheetDescription>
 										</SheetHeader>
 									</ScrollArea>
 								</SheetContent>

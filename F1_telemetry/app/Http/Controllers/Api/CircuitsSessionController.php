@@ -52,39 +52,20 @@ class CircuitsSessionController extends RetrieveDrivers
 		$response = json_decode($response);
 		$response = json_decode(json_encode($response), true);
 
-		$corners = [];
-		foreach($response['circuits'] as $circuit){
-			if($circuit['numberOfCorners'] > 0){
-				array_key_exists($circuit['numberOfCorners'], $corners) ? $corners[$circuit['numberOfCorners']] += 1 : $corners[$circuit['numberOfCorners']] = 1;
-			}
-		}
-
-		return $corners;
-	}
-
-	/**
-	 * Return breakdown of track avg corners count
-	 */
-	public function getAvgCircuitsCorners(): float
-	{
-		$response = Http::withUrlParameters([
-			'endpoint' => 'https://f1api.dev/api/',
-			'limit' => 1000,
-			'section' => 'circuits'
-		])->get('{+endpoint}{section}?limit={limit}');
-		$response = json_decode($response);
-		$response = json_decode(json_encode($response), true);
-
+		$corners['corners'] = [];
+		$corners['avg'] = 0;
 		$avg = [];
 		foreach($response['circuits'] as $circuit){
 			if($circuit['numberOfCorners'] > 0){
-				array_push($avg, $circuit['numberOfCorners']);	
+				array_key_exists($circuit['numberOfCorners'], $corners['corners']) ? $corners['corners'][$circuit['numberOfCorners']] += 1 : $corners['corners'][$circuit['numberOfCorners']] = 1;
+				array_push($avg, $circuit['numberOfCorners']);
 			}
 		}
-	
+
 		$average = array_sum($avg)/count($avg);
-		
-		return $average;
+		$corners['avg'] = $average;
+
+		return $corners;
 	}
 
 
@@ -101,38 +82,19 @@ class CircuitsSessionController extends RetrieveDrivers
 		$response = json_decode($response);
 		$response = json_decode(json_encode($response), true);
 
-		$length = [];
-		foreach($response['circuits'] as $circuit){
-			if($circuit['numberOfCorners'] > 0){
-				array_key_exists($circuit['circuitName'], $length) ? $length[$circuit['circuitName']] = $circuit['circuitLength']/ 1000 : $length[$circuit['circuitName']] = ($circuit['circuitLength']/ 1000);
-			}
-		}
-		asort($length);
-		return $length;
-	}
-
-	/**
-	 * Return breakdown of track avg corners count
-	 */
-	public function getAvgCircuitsLength(): float
-	{
-		$response = Http::withUrlParameters([
-			'endpoint' => 'https://f1api.dev/api/',
-			'limit' => 1000,
-			'section' => 'circuits'
-		])->get('{+endpoint}{section}?limit={limit}');
-		$response = json_decode($response);
-		$response = json_decode(json_encode($response), true);
-
+		$length['circuits'] = [];
+		$length['avg'] = 0;
 		$avg = [];
 		foreach($response['circuits'] as $circuit){
-			if($circuit['circuitLength'] > 0){
+			if($circuit['numberOfCorners'] > 0){
+				array_key_exists($circuit['circuitName'], $length['circuits']) ? $length['circuits'][$circuit['circuitName']] = $circuit['circuitLength']/ 1000 : $length['circuits'][$circuit['circuitName']] = ($circuit['circuitLength']/ 1000);
 				array_push($avg, $circuit['circuitLength'] / 1000);	
 			}
 		}
-	
+
 		$average = array_sum($avg)/count($avg);
-		
-		return $average;
+		$length['avg'] = $average;
+		asort($length['circuits']);
+		return $length;
 	}
 }
