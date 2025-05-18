@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
 
 		Route::get('/getTeam/{query}', [TeamSessionController::class, 'showTeam'])
 		->name('showTeam');
+
+		Route::get('/getTeamsNationalities', [TeamSessionController::class, 'getTeamsNationalities'])
+		->name('getTeamsNationalities');
 	// Circuits Data
 		Route::get('/allCircuits/{limit}', [CircuitsSessionController::class, 'showAll'])
 		->name('allCircuits');

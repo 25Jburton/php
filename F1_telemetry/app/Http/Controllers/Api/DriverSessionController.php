@@ -80,7 +80,7 @@ class DriverSessionController extends RetrieveDrivers
 		foreach($allNationalitiesArray as $nationality){
 			$nationalityArray[$nationality] += 1;
 		}
-
+		asort($nationalityArray);
 		return $nationalityArray;
 	}
 

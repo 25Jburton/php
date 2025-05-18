@@ -59,4 +59,27 @@ class TeamSessionController extends RetrieveDrivers
 		return $response;
 	}
 
+	public function getTeamsNationalities(): Array
+	{  
+		$response = Http::withUrlParameters([
+			'endpoint' => 'https://f1api.dev/api/',
+			'limit' => 1000,
+			'section' => 'teams'
+		])->get('{+endpoint}/{section}?limit={limit}');
+		$response = json_decode($response);
+		$response = json_decode(json_encode($response), true);
+		$nationalityArray = [];
+		$allNationalitiesArray = [];
+		foreach($response['teams'] as $driver){
+			$nationalityArray[$driver['teamNationality']] = 0;
+			array_push($allNationalitiesArray, $driver['teamNationality']);
+		}
+		foreach($allNationalitiesArray as $nationality){
+			$nationalityArray[$nationality] += 1;
+		}
+
+		asort($nationalityArray);
+		return $nationalityArray;
+	}
+
 }

@@ -11,7 +11,7 @@ export function TeamIndividualCard({ teams , teamSearch}: { teams: TeamsItemType
     return (
         <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-4">
             {teams.map((item) => (
-                <div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
+                <div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center" key={item['teamName']}>
                     <Drawer>
                         <DrawerTrigger className="p-4 rounded-xl hover:bg-red-500 hover:text-accent-foreground "> 
                             <Badge>{item['teamNationality']}</Badge><br/>{item['teamName']}

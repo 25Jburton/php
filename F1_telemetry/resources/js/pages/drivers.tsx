@@ -12,7 +12,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DriverIndividualCard } from "@/components/drivers/individual-driver-card";
 import { CardContent } from "@/components/ui/card";
-import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
+import {Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
 import NationalityGraph from '@/components/graphs/drivers-nationality-graph';
 
 const breadcrumbs: BreadcrumbItem[] = [
