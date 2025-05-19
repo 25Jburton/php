@@ -14,6 +14,7 @@ import { DriverIndividualCard } from "@/components/drivers/individual-driver-car
 import { CardContent } from "@/components/ui/card";
 import {Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
 import NationalityGraph from '@/components/graphs/drivers-nationality-graph';
+import '../../css/dashboard.css';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -178,6 +179,7 @@ export default function Drivers() {
                     </div>
                 </CardContent>
                 <div className="grid auto-rows-min gap-4 md:grid-cols-1 rounded-xl border">
+                    <span className="drawer-header-text">Formula 1 Drivers Search</span>
                     <ScrollArea className="h-[80vh] rounded-md">
                         <DriverIndividualCard driver={driver}  driverSearch={driverSearch}/>
                     </ScrollArea>

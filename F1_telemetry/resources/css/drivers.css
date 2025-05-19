@@ -1,0 +1,105 @@
+.drawer-trigger{
+    border-radius: 1rem;
+    animation: fadeIn 2s, growCard 1.5s;
+}
+
+.drawer-trigger:hover{
+    transform: scale(0.8);
+}
+
+.drawer-trigger:focus {
+    transform: scale(0.8);
+}
+
+.drawer-trigger-content{
+    text-align: center;
+    border-radius: 1rem;
+    position: relative;
+    padding: 3rem;
+}
+
+.drawer-trigger-badge{
+    margin: 1rem;
+}
+
+.drawer-header-text, .drawer-title{
+    order: 2;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 1vw, 3rem);
+    line-height: 0.25em;
+    text-align: center;
+    text-shadow: 3px 1px 1px #ff4a4a, 2px 2px 1px #670000, 4px 2px 1px #ff6262,
+        3px 3px 1px #670000, 5px 3px 1px #ff6262, 4px 4px 1px #670000,
+        6px 4px 1px #ff6262, 5px 5px 1px #670000, 7px 5px 1px #ff6262,
+        6px 6px 1px #670000, 8px 6px 1px #ff6262, 7px 7px 1px #670000,
+        5px 7px 1px #ff6262;
+
+    span {
+        display: block;
+        position: relative;
+
+        &:before {
+        content: attr(data-text);
+        position: absolute;
+        text-shadow: 2px 2px 1px #e94aa1, -1px -1px 1px #c736f9,
+            -2px 2px 1px #e94aa1, 1px -1px 1px #f736f9;
+        z-index: 1;
+        }
+
+        &:nth-child(1) {
+        padding-right: 2.25rem;
+        }
+
+        &:nth-child(2) {
+        padding-left: 2.25rem;
+        }
+    }
+}
+
+.drawer-content{
+    order: 2;
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1rem, 0.5vw, 2rem);
+    line-height: 0.25em;
+    text-align: center;
+    text-shadow: 3px 1px 1px #ff4a4a, 2px 2px 1px #670000, 4px 2px 1px #ff6262,
+        3px 3px 1px #670000, 5px 3px 1px #ff6262, 4px 4px 1px #670000,
+        6px 4px 1px #ff6262, 5px 5px 1px #670000, 7px 5px 1px #ff6262,
+        6px 6px 1px #670000, 8px 6px 1px #ff6262, 7px 7px 1px #670000,
+        5px 7px 1px #ff6262;
+
+    span {
+        display: block;
+        position: relative;
+
+        &:before {
+        content: attr(data-text);
+        position: absolute;
+        text-shadow: 2px 2px 1px #e94aa1, -1px -1px 1px #c736f9,
+            -2px 2px 1px #e94aa1, 1px -1px 1px #f736f9;
+        z-index: 1;
+        }
+
+        &:nth-child(1) {
+        padding-right: 2.25rem;
+        }
+
+        &:nth-child(2) {
+        padding-left: 2.25rem;
+        }
+    }
+}
+
+@keyframes fadeIn {
+	from { opacity: 0.3; }
+	to { opacity: 0.5; }
+}
+
+@keyframes growCard {
+	from { transform: scale(0.5); }
+	to { transform: scale(1); }
+}
