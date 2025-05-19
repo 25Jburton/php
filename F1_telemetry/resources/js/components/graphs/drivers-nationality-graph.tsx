@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
+import '../../../css/drivers.css';
 
 export default function NationalityGraph(){
     const [nationalityData, setNationalityData] = useState([]);
@@ -33,10 +34,10 @@ export default function NationalityGraph(){
 	const chartConfig = {
 		Nationality: {
 			label: "Nationality",
-			color: "hsl(var(--chart-1))",
+			color: "hsl(var(--chart-5))",
 		},
         label: {
-            color: "hsl(var(--background))",
+            color: "hsl(var(--chart-5))",
         },
 	} satisfies ChartConfig;
 
@@ -73,7 +74,7 @@ export default function NationalityGraph(){
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        <Bar dataKey="Total" fill="var(--chart-2)" layout="vertical" radius={2} minPointSize={25} >
+                        <Bar dataKey="Total" fill="var(--chart-5)" layout="vertical" radius={2} minPointSize={25} >
                             <LabelList
                                 dataKey="Nationality"
                                 position="right"
