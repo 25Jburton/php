@@ -5,18 +5,25 @@ import { Label } from "@/components/ui/label"
 import { Icon } from '../universal/icon';
 import { CrownIcon, Trophy } from 'lucide-react';
 import { Badge } from '../ui/badge';
+import '../../../css/drawer.css';
+
 export function ConstructorStandingsIndividualCard({ standings, year }: { standings: ConstructorsStandingItemType[], year: string }) {
 	return (
 		<div className="p-4 grid auto-rows-min gap-4 md:grid-cols-3">
 			{standings && standings.map((item) => (
-				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center">
-					<Label className="text-right">{item['position']}</Label>
-						<br/>
-					<Badge variant="outline" className='p-4 m-3'>{item['points']} Points</Badge>
-					<br/>
+				<div key={item['position']} className="drawer-trigger p-4 border-sidebar-border/70 dark:border-sidebar-border relative rounded-xl border text-center hover:bg-red-500 drawer-trigger-text">
 					<Dialog>
-						<DialogTrigger asChild>
-							<Button variant="destructive">{item['team']['teamName']}</Button>
+						<DialogTrigger asChild className='m-3'>
+							<div>
+								<span className='p-3'>
+									{item['team']['teamName']}
+								</span>
+								<Badge variant="secondary" className='w-[100%] p-3'>
+									{item['position']}
+									<br/>
+									{item['points']} Points 
+								</Badge>
+                            </div>
 						</DialogTrigger>
 						<DialogContent className="sm:max-w-[425px]">
 							<DialogHeader>

@@ -94,31 +94,31 @@ export default function Standings() {
 							</SelectTrigger>
 							<SelectContent onSelect={handleChange}>
 							{years.map((year) => (
-								<SelectItem value={year}>{year}</SelectItem>
+								<SelectItem key={year} value={year}>{year}</SelectItem>
 							))}
 							</SelectContent>
 						</Select>
 					</div>
 				</div>
 				<div className="grid auto-rows-min gap-4 md:grid-cols-2 rounded-xl border">
-				<ScrollArea className="h-[80vh] rounded-md text-center">
-							{(() => {
-								if(driverStandings[0]){
-									let result = [];
-									let driver_name = driverStandings[0]['driver']['name'] +' '+driverStandings[0]['driver']['surname'];
-									if(currentYear > parseInt(year)){
-										result.push(<Label className='m-3'>Driver Champion: {driver_name} <Icon iconNode={CrownIcon}></Icon></Label>);
-									}else{
-										result.push(<Label className='m-3'>Leader: {driver_name}</Label>);
+					<ScrollArea className="h-[80vh] rounded-md text-center">
+								{(() => {
+									if(driverStandings[0]){
+										let result = [];
+										let driver_name = driverStandings[0]['driver']['name'] +' '+driverStandings[0]['driver']['surname'];
+										if(currentYear > parseInt(year)){
+											result.push(<Label key={driver_name} className='m-3'>Driver Champion: {driver_name} <Icon iconNode={CrownIcon}></Icon></Label>);
+										}else{
+											result.push(<Label key={driver_name} className='m-3'>Leader: {driver_name}</Label>);
+										}
+										return result;
 									}
-									return result;
-								}
-							})()}
-					<DriverStandingsIndividualCard standings={driverStandings} year={year} />
-				</ScrollArea>
-				<ScrollArea className="h-[80vh] rounded-md text-center">
-					<ConstructorStandingsIndividualCard standings={teamStandings} year={year} />
-				</ScrollArea>
+								})()}
+						<DriverStandingsIndividualCard standings={driverStandings} year={year} />
+					</ScrollArea>
+					<ScrollArea className="h-[80vh] rounded-md text-center">
+						<ConstructorStandingsIndividualCard standings={teamStandings} year={year} />
+					</ScrollArea>
 				</div>
 			</div>
 		</AppLayout>
