@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { type DriversItemType as DriversItemType } from '@/types';
-import {Drawer,DrawerClose,DrawerContent,DrawerDescription,DrawerFooter,DrawerHeader,DrawerTitle,DrawerTrigger,} from "@/components/ui/drawer"
+import { Drawer,DrawerContent,DrawerDescription,DrawerHeader,DrawerTitle,DrawerTrigger } from "@/components/ui/drawer"
 import { Badge } from '../ui/badge';
-import '../../../css/drivers.css';
+import '../../../css/drawer.css';
 
 export function DriverIndividualCard({ driver, driverSearch }: { driver: DriversItemType[], driverSearch: DriversItemType[]  }) {
 
@@ -25,7 +25,7 @@ export function DriverIndividualCard({ driver, driverSearch }: { driver: Drivers
                     <DrawerContent>
                         <DrawerHeader className='text-center'>
                             <DrawerTitle className='drawer-title'>{item['name']} {item['surname']}</DrawerTitle>
-                            <DrawerDescription>
+                            <DrawerDescription className='m-3'>
                                 General driver information.
                             </DrawerDescription>
                         </DrawerHeader>
@@ -36,14 +36,12 @@ export function DriverIndividualCard({ driver, driverSearch }: { driver: Drivers
                                 <span>{item['nationality']}</span>
                             </span>
                             <span>DOB: {item['birthday']}</span>
-                            <span >
+                            <span>
                                 <a href={item['url']} target='blank'>
                                     <Button variant="outline" className='text-green-500'>More Information</Button>
                                 </a>
                             </span>
                         </div>
-                        <DrawerFooter>
-                        </DrawerFooter>
                     </DrawerContent>
                 </Drawer>
             ))}

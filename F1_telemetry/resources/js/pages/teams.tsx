@@ -150,8 +150,6 @@ export default function Teams() {
                                 ))}
                                 </SelectContent>
                             </Select>
-
-                            
                             <Sheet>
 								<SheetTrigger className="w-[150%] overflow-hidden p-4" variant="secondary">
 									View Teams Breakdown
@@ -171,8 +169,8 @@ export default function Teams() {
                         </div>
                     </div>
                 </CardContent>
-
                 <div className="grid auto-rows-min gap-4 md:grid-cols-1 rounded-xl border">
+                    <span className="drawer-header-text">Formula 1 Teams Search</span>
                     <ScrollArea className="h-[80vh] rounded-md">
                         <TeamIndividualCard teams={team}  teamSearch={teamSearch}/>
                     </ScrollArea>

@@ -10,7 +10,7 @@ import { Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList}
 import { Button } from '@/components/ui/button';
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DriverIndividualCard } from "@/components/drivers/individual-driver-card";
+import { DriverIndividualCard } from "@/components/drivers/driver-individual-card";
 import { CardContent } from "@/components/ui/card";
 import {Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
 import NationalityGraph from '@/components/graphs/drivers-nationality-graph';
@@ -158,7 +158,6 @@ export default function Drivers() {
                                 ))}
                                 </SelectContent>
                             </Select>
-
                             <Sheet>
 								<SheetTrigger variant="secondary">
 									<a className="w-[150%] overflow-hidden p-4" >View Drivers Breakdown</a>
