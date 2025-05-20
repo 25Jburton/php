@@ -13,7 +13,7 @@ export function DriverIndividualCard({ driver, driverSearch }: { driver: Drivers
         <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-4">
             {driver.map((item) => (
                 <Drawer key={item['driverId']}>
-                    <DrawerTrigger className="drawer-trigger hover:bg-red-500 hover:text-accent-foreground focus:bg-red-500">
+                    <DrawerTrigger className="drawer-trigger hover:bg-red-500 hover:text-accent-foreground">
                         <div className="drawer-trigger-content border-sidebar-border/70 dark:border-sidebar-border border">
                                 <Badge className='drawer-trigger-badge'>{item['nationality']}</Badge>
                                 <br/>

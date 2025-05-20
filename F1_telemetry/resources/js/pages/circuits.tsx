@@ -177,6 +177,7 @@ export default function Circuits() {
 				</CardContent>
 
 				<div className="grid auto-rows-min gap-4 md:grid-cols-1 rounded-xl border">
+					<span className="drawer-header-text">Formula 1 Circuits Search</span>
 					<ScrollArea className="h-[80vh] rounded-md">
 						<CircuitIndividualCard circuit={circuit} circuitSearch={circuitSearch}/>
 					</ScrollArea>

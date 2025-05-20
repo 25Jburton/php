@@ -7,9 +7,9 @@
     transform: scale(0.8);
 }
 
-.drawer-trigger:focus {
+/* .drawer-trigger:focus {
     transform: scale(0.8);
-}
+} */
 
 .drawer-trigger-content{
     text-align: center;

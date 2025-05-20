@@ -13,18 +13,18 @@ export function TeamIndividualCard({ teams , teamSearch}: { teams: TeamsItemType
         <div className="p-4 grid auto-rows-min gap-4 md:grid-cols-4">
             {teams.map((item) => (
                 <Drawer key={item['teamId']}>
-                    <DrawerTrigger className="drawer-trigger hover:bg-red-500 hover:text-accent-foreground focus:bg-red-500"> 
+                    <DrawerTrigger className="drawer-trigger hover:bg-red-500 hover:text-accent-foreground"> 
                          <div className="drawer-trigger-content border-sidebar-border/70 dark:border-sidebar-border border">
                             <Badge className='drawer-trigger-badge'>{item['teamNationality']}</Badge>
                             <br/>
                             <span className='drawer-trigger-text'>
                                 {item['teamName']}
-                            </span>{item['teamName']}
+                            </span>
                         </div>
                     </DrawerTrigger>
                     <DrawerContent>
                         <DrawerHeader className='text-center'>
-                            <DrawerTitle className='drawer-title'><h1>{item['teamName']}</h1></DrawerTitle>
+                            <DrawerTitle className='drawer-title'>{item['teamName']}</DrawerTitle>
                             <DrawerDescription className='m-3'>
                                 General teams information.
                             </DrawerDescription>
