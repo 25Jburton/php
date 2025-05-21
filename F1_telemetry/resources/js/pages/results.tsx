@@ -10,6 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select";
+import { ResultsTable } from '@/components/results/results-data-table';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -21,7 +22,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 		href: '/results',
 	},
 ];
-
 
 export default function Results() {
  
@@ -106,13 +106,7 @@ export default function Results() {
 					</div>
 				</div>
 				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1  rounded-xl border md:min-h-min">
-					<Label htmlFor="results">Output Session's Results</Label>
-					Table looping all basic driver data for session. Selecting a record populates top blocks
-					
-					- Session selected
-					- surname , name (shortName)
-					- date / time
-					- time
+					<ResultsTable />
 					<PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
 				</div>
 			</div>
