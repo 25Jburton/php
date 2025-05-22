@@ -3,15 +3,8 @@ import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select";
-import { ResultsTable } from '@/components/results/results-data-table';
-import { DataTableDemo } from '@/components/results/react-dataTable';
+import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue } from "@/components/ui/select";
+import { ResultsDataTable } from '@/components/results/react-dataTable';
 
 const breadcrumbs: BreadcrumbItem[] = [
 	{
@@ -107,8 +100,7 @@ export default function Results() {
 					</div>
 				</div>
 				<div className="p-4 border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1  rounded-xl border md:min-h-min">
-					<ResultsTable />
-					<DataTableDemo />
+					<ResultsDataTable />
 				</div>
 			</div>
 		</AppLayout>
