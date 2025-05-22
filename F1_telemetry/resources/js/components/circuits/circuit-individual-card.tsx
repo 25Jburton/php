@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Drawer,DrawerContent,DrawerDescription,DrawerHeader,DrawerTitle,DrawerTrigger } from "@/components/ui/drawer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import {Carousel,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious} from "@/components/ui/carousel";
+import { Carousel,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious } from "@/components/ui/carousel";
 import '../../../css/drawer.css';
 
 export function CircuitIndividualCard({ circuit, circuitSearch }: { circuit: CircuitsItemType[], circuitSearch: CircuitsItemType[] }) {

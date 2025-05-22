@@ -6,15 +6,13 @@ import { useState, useEffect } from 'react';
 import { LoadingCard } from '@/components/loading/loading-card';
 import { CircuitIndividualCard } from '@/components/circuits/circuit-individual-card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
-import {Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList} from "@/components/ui/command"
+import { Popover,PopoverContent,PopoverTrigger } from "@/components/ui/popover"
+import { Command,CommandEmpty,CommandGroup,CommandInput,CommandItem,CommandList } from "@/components/ui/command"
 import { Button } from '@/components/ui/button';
-import { Check, ChevronsUpDown, TrendingUp } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { CartesianGrid, XAxis, Bar, BarChart, LineChart, Line, LabelList } from "recharts";
-import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
+import { CardContent } from "@/components/ui/card";
+import { Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger } from "@/components/ui/sheet";
 import CornersGraph from "@/components/graphs/circuits-corners-graph";
 import LengthGraph from "@/components/graphs/circuits-length-graph";
 

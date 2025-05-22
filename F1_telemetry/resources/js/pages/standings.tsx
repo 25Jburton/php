@@ -63,7 +63,7 @@ export default function Standings() {
 
 	const currentYear = new Date().getFullYear();
 	const years = [];
-	for(var i=1950; i < currentYear; i++){
+	for(var i=1950; i <= currentYear; i++){
 		years.push(i.toString());
 	}
 
